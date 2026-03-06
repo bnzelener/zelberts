@@ -1,0 +1,119 @@
+<section class="max-w-2xl mx-auto px-6 py-20">
+  <div class="text-center mb-12">
+    <h1 class="font-serif font-light text-5xl text-nasturtium-forest mb-2">RSVP</h1>
+    <div class="w-12 h-px bg-nasturtium-olive mx-auto mt-4 mb-6"></div>
+    <p class="text-nasturtium-sage text-lg">We would be delighted to have you celebrate with us.</p>
+  </div>
+
+  <%= form_with(model: @guest, url: rsvps_path, class: "space-y-8") do |f| %>
+    <% if @guest.errors.any? %>
+      <div class="bg-nasturtium-red/5 border border-nasturtium-red/20 rounded p-4">
+        <p class="text-nasturtium-red text-sm font-medium mb-2">
+          Please correct the following:
+        </p>
+        <ul class="list-disc list-inside text-nasturtium-red/80 text-sm space-y-1">
+          <% @guest.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <%# Name fields %>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div>
+        <%= f.label :first_name, class: "block text-xs tracking-[0.2em] uppercase text-nasturtium-sage mb-2" %>
+        <%= f.text_field :first_name,
+            class: "w-full border-b border-nasturtium-forest/20 bg-transparent py-3 text-nasturtium-forest-dark font-body focus:border-nasturtium-forest focus:outline-none transition-colors",
+            placeholder: "First name" %>
+      </div>
+      <div>
+        <%= f.label :last_name, class: "block text-xs tracking-[0.2em] uppercase text-nasturtium-sage mb-2" %>
+        <%= f.text_field :last_name,
+            class: "w-full border-b border-nasturtium-forest/20 bg-transparent py-3 text-nasturtium-forest-dark font-body focus:border-nasturtium-forest focus:outline-none transition-colors",
+            placeholder: "Last name" %>
+      </div>
+    </div>
+
+    <%# Email %>
+    <div>
+      <%= f.label :email, class: "block text-xs tracking-[0.2em] uppercase text-nasturtium-sage mb-2" %>
+      <%= f.email_field :email,
+          class: "w-full border-b border-nasturtium-forest/20 bg-transparent py-3 text-nasturtium-forest-dark font-body focus:border-nasturtium-forest focus:outline-none transition-colors",
+          placeholder: "your@email.com" %>
+    </div>
+
+    <%# Attending %>
+    <div>
+      <p class="text-xs tracking-[0.2em] uppercase text-nasturtium-sage mb-4">Will you be attending?</p>
+      <div class="flex gap-6">
+        <label class="flex items-center gap-3 cursor-pointer">
+          <%= f.radio_button :attending, true,
+              class: "accent-nasturtium-forest w-4 h-4" %>
+          <span class="text-nasturtium-forest-dark">Joyfully accepts</span>
+        </label>
+        <label class="flex items-center gap-3 cursor-pointer">
+          <%= f.radio_button :attending, false,
+              class: "accent-nasturtium-forest w-4 h-4" %>
+          <span class="text-nasturtium-forest-dark">Regretfully declines</span>
+        </label>
+      </div>
+    </div>
+
+    <%# Meal choice %>
+    <div>
+      <%= f.label :meal_choice, class: "block text-xs tracking-[0.2em] uppercase text-nasturtium-sage mb-2" %>
+      <%= f.select :meal_choice,
+          options_for_select([
+            ["Please select", ""],
+            ["Beef", "beef"],
+            ["Chicken", "chicken"],
+            ["Fish", "fish"],
+            ["Vegetarian", "vegetarian"],
+            ["Vegan", "vegan"]
+          ]),
+          {},
+          class: "w-full border-b border-nasturtium-forest/20 bg-transparent py-3 text-nasturtium-forest-dark font-body focus:border-nasturtium-forest focus:outline-none transition-colors" %>
+    </div>
+
+    <%# Dietary notes %>
+    <div>
+      <%= f.label :dietary_notes, "Dietary restrictions or allergies", class: "block text-xs tracking-[0.2em] uppercase text-nasturtium-sage mb-2" %>
+      <%= f.text_area :dietary_notes,
+          rows: 2,
+          class: "w-full border-b border-nasturtium-forest/20 bg-transparent py-3 text-nasturtium-forest-dark font-body focus:border-nasturtium-forest focus:outline-none transition-colors resize-none",
+          placeholder: "Any dietary restrictions we should know about?" %>
+    </div>
+
+    <%# Plus one %>
+    <div>
+      <label class="flex items-center gap-3 cursor-pointer">
+        <%= f.check_box :plus_one,
+            class: "accent-nasturtium-forest w-4 h-4" %>
+        <span class="text-nasturtium-forest-dark">I will be bringing a guest</span>
+      </label>
+    </div>
+
+    <div>
+      <%= f.label :plus_one_name, "Guest name", class: "block text-xs tracking-[0.2em] uppercase text-nasturtium-sage mb-2" %>
+      <%= f.text_field :plus_one_name,
+          class: "w-full border-b border-nasturtium-forest/20 bg-transparent py-3 text-nasturtium-forest-dark font-body focus:border-nasturtium-forest focus:outline-none transition-colors",
+          placeholder: "Your guest's full name" %>
+    </div>
+
+    <%# Message %>
+    <div>
+      <%= f.label :message, "A note to the couple", class: "block text-xs tracking-[0.2em] uppercase text-nasturtium-sage mb-2" %>
+      <%= f.text_area :message,
+          rows: 3,
+          class: "w-full border-b border-nasturtium-forest/20 bg-transparent py-3 text-nasturtium-forest-dark font-body focus:border-nasturtium-forest focus:outline-none transition-colors resize-none",
+          placeholder: "We'd love to hear from you..." %>
+    </div>
+
+    <%# Submit %>
+    <div class="text-center pt-4">
+      <%= f.submit "Send RSVP",
+          class: "bg-nasturtium-forest text-nasturtium-cream px-12 py-4 text-sm tracking-[0.2em] uppercase hover:bg-nasturtium-forest-light transition-colors cursor-pointer" %>
+    </div>
+  <% end %>
+</section>

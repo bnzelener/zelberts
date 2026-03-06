@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  date: 2026-03-05
+  time: MyString
+  location: MyString
+  address: MyString
+  description: MyText
+  sort_order: 1
+
+two:
+  name: MyString
+  date: 2026-03-05
+  time: MyString
+  location: MyString
+  address: MyString
+  description: MyText
+  sort_order: 1

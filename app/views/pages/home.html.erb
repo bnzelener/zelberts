@@ -1,0 +1,67 @@
+<%# ── Hero Section ── %>
+<section class="relative min-h-[70vh] flex items-end justify-end overflow-hidden">
+  <%# Real nasturtium flower photo as hero background %>
+  <div class="absolute inset-0 z-0">
+    <%= image_tag "IMG_0139.jpeg",
+        alt: "",
+        class: "w-full h-full object-cover object-center" %>
+  </div>
+
+  <div class="relative z-10 text-right px-10 pb-12 pt-24">
+    <h1 class="font-serif font-light text-6xl md:text-8xl tracking-tight text-nasturtium-cream mb-4" style="text-shadow: 0 2px 8px rgba(30, 61, 42, 0.4);">
+      Ali & Brennan
+    </h1>
+    <div class="w-16 h-px bg-nasturtium-cream/60 ml-auto my-8"></div>
+    <p class="font-body text-xl md:text-2xl text-nasturtium-cream font-light tracking-wide" style="text-shadow: 0 1px 4px rgba(30, 61, 42, 0.3);">
+      September 12, 2026
+    </p>
+    <p class="font-body text-lg text-nasturtium-cream/80 mt-3 tracking-wide" style="text-shadow: 0 1px 4px rgba(30, 61, 42, 0.3);">
+      Lyons, Colorado
+    </p>
+  </div>
+</section>
+
+<%# ── Photo Gallery ── %>
+<section style="background-color: #508A41; padding: 2.5rem 0;">
+  <div style="max-width: 48rem; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0 0.75rem;">
+    <%= image_tag "IMG_0022.JPG", alt: "Ali and Brennan", style: "flex: 1 1 0%; aspect-ratio: 1; object-fit: cover; border-radius: 4px; min-width: 0;" %>
+    <%= image_tag "gallery-7.jpg", alt: "Ali and Brennan", style: "flex: 1 1 0%; aspect-ratio: 1; object-fit: cover; border-radius: 4px; min-width: 0;" %>
+  </div>
+</section>
+
+<%# ── Quick Details ── %>
+<section class="text-nasturtium-cream py-20" style="background-color: #508A41;">
+  <div class="max-w-5xl mx-auto px-6 text-center">
+    <h2 class="font-serif font-light text-4xl mb-12">The Weekend</h2>
+
+    <div class="grid md:grid-cols-3 gap-12">
+      <div>
+        <p class="text-xs tracking-[0.3em] uppercase text-nasturtium-olive mb-3">Friday</p>
+        <p class="font-serif font-light text-2xl mb-2">Welcome Drinks</p>
+        <p class="text-nasturtium-cream/70">September 11 &middot; 5:00 PM</p>
+        <p class="text-nasturtium-cream/50 text-sm mt-1">220 Main St, Lyons, CO</p>
+      </div>
+
+      <div>
+        <p class="text-xs tracking-[0.3em] uppercase text-nasturtium-olive mb-3">Saturday</p>
+        <p class="font-serif font-light text-2xl mb-2">Ceremony + Reception</p>
+        <p class="text-nasturtium-cream/70">September 12 &middot; 4:00 PM</p>
+        <p class="text-nasturtium-cream/50 text-sm mt-1">4121 Ute Hwy, Lyons, CO</p>
+      </div>
+
+      <div>
+        <p class="text-xs tracking-[0.3em] uppercase text-nasturtium-olive mb-3">Saturday Night</p>
+        <p class="font-serif font-light text-2xl mb-2">After Party</p>
+        <p class="text-nasturtium-cream/70">September 12 &middot; 10:00 PM</p>
+        <p class="text-nasturtium-cream/50 text-sm mt-1">450 Main St, Lyons, CO</p>
+      </div>
+    </div>
+
+    <div class="mt-12">
+      <%= link_to "View Full Details",
+          events_path,
+          class: "inline-block border border-nasturtium-cream/40 text-nasturtium-cream px-8 py-3 text-sm tracking-[0.2em] uppercase hover:bg-nasturtium-cream/10 transition-colors" %>
+    </div>
+  </div>
+</section>
+

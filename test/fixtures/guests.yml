@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  first_name: MyString
+  last_name: MyString
+  email: MyString
+  attending: false
+  meal_choice: MyString
+  dietary_notes: MyText
+  plus_one: false
+  plus_one_name: MyString
+  message: MyText
+  responded_at: 2026-03-05 19:42:31
+
+two:
+  first_name: MyString
+  last_name: MyString
+  email: MyString
+  attending: false
+  meal_choice: MyString
+  dietary_notes: MyText
+  plus_one: false
+  plus_one_name: MyString
+  message: MyText
+  responded_at: 2026-03-05 19:42:31

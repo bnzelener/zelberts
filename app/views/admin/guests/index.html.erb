@@ -1,0 +1,59 @@
+<section class="max-w-5xl mx-auto px-6 py-12">
+  <h1 class="font-serif font-light text-4xl text-nasturtium-forest mb-8">RSVP Responses</h1>
+
+  <%# Summary cards %>
+  <div class="grid grid-cols-3 gap-6 mb-10">
+    <div class="text-center p-6 bg-nasturtium-olive/10 rounded">
+      <p class="font-serif text-3xl text-nasturtium-forest"><%= @attending_count %></p>
+      <p class="text-xs tracking-[0.2em] uppercase text-nasturtium-sage mt-1">Attending</p>
+    </div>
+    <div class="text-center p-6 bg-nasturtium-red/5 rounded">
+      <p class="font-serif text-3xl text-nasturtium-red"><%= @not_attending_count %></p>
+      <p class="text-xs tracking-[0.2em] uppercase text-nasturtium-sage mt-1">Declined</p>
+    </div>
+    <div class="text-center p-6 bg-nasturtium-honey/10 rounded">
+      <p class="font-serif text-3xl text-nasturtium-golden"><%= @pending_count %></p>
+      <p class="text-xs tracking-[0.2em] uppercase text-nasturtium-sage mt-1">Pending</p>
+    </div>
+  </div>
+
+  <%# Guest table %>
+  <% if @guests.any? %>
+    <div class="overflow-x-auto">
+      <table class="w-full text-left">
+        <thead>
+          <tr class="border-b border-nasturtium-forest/20">
+            <th class="py-3 pr-4 text-xs tracking-[0.2em] uppercase text-nasturtium-sage font-normal">Name</th>
+            <th class="py-3 pr-4 text-xs tracking-[0.2em] uppercase text-nasturtium-sage font-normal">Email</th>
+            <th class="py-3 pr-4 text-xs tracking-[0.2em] uppercase text-nasturtium-sage font-normal">Status</th>
+            <th class="py-3 pr-4 text-xs tracking-[0.2em] uppercase text-nasturtium-sage font-normal">Meal</th>
+            <th class="py-3 pr-4 text-xs tracking-[0.2em] uppercase text-nasturtium-sage font-normal">Plus One</th>
+            <th class="py-3 text-xs tracking-[0.2em] uppercase text-nasturtium-sage font-normal">Responded</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @guests.each do |guest| %>
+            <tr class="border-b border-nasturtium-linen">
+              <td class="py-4 pr-4 text-nasturtium-forest-dark font-medium"><%= guest.full_name %></td>
+              <td class="py-4 pr-4 text-nasturtium-sage text-sm"><%= guest.email %></td>
+              <td class="py-4 pr-4">
+                <% if guest.attending.nil? %>
+                  <span class="text-nasturtium-golden text-sm">Pending</span>
+                <% elsif guest.attending? %>
+                  <span class="text-nasturtium-sage text-sm">Attending</span>
+                <% else %>
+                  <span class="text-nasturtium-red/70 text-sm">Declined</span>
+                <% end %>
+              </td>
+              <td class="py-4 pr-4 text-nasturtium-sage text-sm"><%= guest.meal_choice || "—" %></td>
+              <td class="py-4 pr-4 text-nasturtium-sage text-sm"><%= guest.plus_one? ? guest.plus_one_name : "—" %></td>
+              <td class="py-4 text-nasturtium-sage text-sm"><%= guest.responded_at&.strftime("%b %e, %Y") || "—" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <p class="text-nasturtium-sage text-center py-12">No responses yet.</p>
+  <% end %>
+</section>

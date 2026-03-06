@@ -1,0 +1,174 @@
+<section class="max-w-3xl mx-auto px-6 py-20">
+  <div class="text-center mb-16">
+    <h1 class="font-serif font-light text-5xl text-nasturtium-forest mb-2">Travel</h1>
+    <div class="w-12 h-px bg-nasturtium-olive mx-auto"></div>
+  </div>
+
+  <div class="prose prose-lg mx-auto mb-16">
+    <p class="text-center text-nasturtium-sage">
+      We're so excited to celebrate with everyone at the Lyons Farmette on
+      September 12, 2026! We recommend booking accommodations in Lyons,
+      Longmont (20 mins away), or Boulder (30 mins away). There's a CU
+      football home game on Saturday, so if you want to stay in Boulder,
+      we recommend booking early.
+    </p>
+  </div>
+
+  <%# ── Leaflet Map ── %>
+  <div class="mb-16">
+    <div id="travel-map" class="w-full h-80 rounded border border-nasturtium-linen z-0"></div>
+  </div>
+
+  <%# Shuttle Info %>
+  <div class="mb-16 text-center">
+    <div class="p-8 bg-nasturtium-olive/5 border border-nasturtium-olive/20 rounded">
+      <p class="text-xs tracking-[0.3em] uppercase text-nasturtium-olive mb-3">Shuttle Service</p>
+      <p class="text-nasturtium-forest-dark">
+        To avoid Boulder game day pricing and crowds we have a room block at
+        the Home2 Suites in Longmont. Shuttles will bring guests to/from
+        Home2 Suites. If you are staying elsewhere, you will be responsible
+        for getting to/from the venue.
+      </p>
+    </div>
+  </div>
+
+  <%# Accommodations %>
+  <div class="mb-16">
+    <h2 class="font-serif font-light text-3xl text-nasturtium-forest text-center mb-8">Where to Stay</h2>
+
+    <div class="text-center p-10 border border-nasturtium-linen rounded">
+      <p class="text-xs tracking-[0.3em] uppercase text-nasturtium-olive mb-3">Room Block</p>
+      <p class="font-serif text-2xl text-nasturtium-forest mb-2">Home2 Suites by Hilton Longmont</p>
+      <p class="text-nasturtium-sage mb-6">710 South Sherman Street, Longmont, CO 80501</p>
+
+      <div class="flex items-center justify-center gap-6">
+        <%# TODO: Replace # with your actual room block booking link %>
+        <a href="https://www.hilton.com/en/book/reservation/rooms/?ctyhocn=QWMLCHT&arrivalDate=2026-09-11&departureDate=2026-09-13&groupCode=CHTZBW&room1NumAdults=1"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="inline-block bg-nasturtium-forest text-nasturtium-cream px-8 py-3 text-sm tracking-[0.2em] uppercase hover:bg-nasturtium-forest-light transition-colors">
+          Book Room Block
+        </a>
+        <a href="https://maps.google.com/?q=710+South+Sherman+Street+Longmont+CO+80501"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="inline-block border border-nasturtium-forest/30 text-nasturtium-forest px-8 py-3 text-sm tracking-[0.2em] uppercase hover:bg-nasturtium-forest/5 transition-colors">
+          Directions
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <%# Getting There %>
+  <div class="mb-16">
+    <h2 class="font-serif font-light text-3xl text-nasturtium-forest text-center mb-8">The Venue</h2>
+
+    <div class="text-center p-10 border border-nasturtium-linen rounded">
+      <p class="font-serif text-2xl text-nasturtium-forest mb-2">The Lyons Farmette</p>
+      <p class="text-nasturtium-sage mb-6">4121 Ute Hwy, Lyons, CO 80540</p>
+      <a href="https://maps.google.com/?q=4121+Ute+Hwy+Lyons+CO+80540"
+         target="_blank"
+         rel="noopener noreferrer"
+         class="inline-block border border-nasturtium-forest/30 text-nasturtium-forest px-8 py-3 text-sm tracking-[0.2em] uppercase hover:bg-nasturtium-forest/5 transition-colors">
+        Directions
+      </a>
+    </div>
+  </div>
+
+  <%# Other Options %>
+  <div>
+    <h2 class="font-serif font-light text-3xl text-nasturtium-forest text-center mb-8">Other Options</h2>
+
+    <div class="grid md:grid-cols-2 gap-8">
+      <div class="text-center p-8 border border-nasturtium-linen rounded">
+        <p class="text-xs tracking-[0.3em] uppercase text-nasturtium-olive mb-3">Longmont</p>
+        <p class="text-nasturtium-forest-dark">~20 minutes from venue</p>
+        <p class="text-nasturtium-sage text-sm mt-2">Most convenient option with shuttle access</p>
+      </div>
+
+      <div class="text-center p-8 border border-nasturtium-linen rounded">
+        <p class="text-xs tracking-[0.3em] uppercase text-nasturtium-olive mb-3">Boulder</p>
+        <p class="text-nasturtium-forest-dark">~30 minutes from venue</p>
+        <p class="text-nasturtium-sage text-sm mt-2">Book early — CU home game that weekend</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%# ── Leaflet CSS & JS from CDN ── %>
+<% content_for :head do %>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin="" />
+<% end %>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
+
+<script>
+  document.addEventListener("turbo:load", function() {
+    var el = document.getElementById("travel-map");
+    if (!el || el._leaflet_id) return;
+
+    // Coordinates
+    var denver    = [39.8561, -104.6737];  // Denver International Airport
+    var anchorage = [61.2181, -149.9003];  // Anchorage, AK
+    var bayshore  = [40.7254, -73.2454];   // Bay Shore, Long Island, NY
+
+    var map = L.map("travel-map", {
+      scrollWheelZoom: false
+    }).setView([48, -105], 3);
+
+    // OpenStreetMap tiles (free, no API key)
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      maxZoom: 18
+    }).addTo(map);
+
+    // Curved line helper — creates an arc between two points
+    function curvedLine(start, end, color) {
+      var latlngs = [];
+      var steps = 50;
+      for (var i = 0; i <= steps; i++) {
+        var t = i / steps;
+        var lat = start[0] + t * (end[0] - start[0]);
+        var lng = start[1] + t * (end[1] - start[1]);
+        // Add arc by offsetting latitude
+        var arc = Math.sin(t * Math.PI) * Math.abs(end[1] - start[1]) * 0.08;
+        lat += arc;
+        latlngs.push([lat, lng]);
+      }
+      return L.polyline(latlngs, {
+        color: color,
+        weight: 2,
+        opacity: 0.6,
+        dashArray: "6 4"
+      });
+    }
+
+    // Travel lines
+    curvedLine(anchorage, denver, "#F07B4C").addTo(map);
+    curvedLine(bayshore, denver, "#F07B4C").addTo(map);
+
+    // Marker icon
+    var markerIcon = L.divIcon({
+      className: "",
+      html: '<div style="background:#2D5A3D; width:12px; height:12px; border-radius:50%; border:2px solid white; box-shadow:0 1px 4px rgba(0,0,0,0.3);"></div>',
+      iconSize: [12, 12],
+      iconAnchor: [6, 6],
+      popupAnchor: [0, -8]
+    });
+
+    L.marker(denver, { icon: markerIcon }).addTo(map)
+      .bindPopup("<strong>Denver, CO</strong><br>Fly into DEN");
+    L.marker(anchorage, { icon: markerIcon }).addTo(map)
+      .bindPopup("<strong>Anchorage, AK</strong><br>Brennan's stomping grounds");
+    L.marker(bayshore, { icon: markerIcon }).addTo(map)
+      .bindPopup("<strong>Bay Shore, Long Island</strong><br>Ali's stomping grounds");
+
+    // Fit map to show all points
+    var bounds = L.latLngBounds([denver, anchorage, bayshore]);
+    map.fitBounds(bounds, { padding: [30, 30] });
+  });
+</script>

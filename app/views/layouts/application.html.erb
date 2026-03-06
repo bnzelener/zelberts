@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title><%= content_for(:title) || "Ali & Brennan" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="description" content="The wedding of Ali & Brennan">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <%# Google Fonts: Playfair Display (thin headings) + Lora (body) %>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="min-h-screen flex flex-col bg-nasturtium-cream text-nasturtium-forest-dark">
+    <%# ── Navigation ── %>
+    <header class="border-b border-nasturtium-linen">
+      <nav class="max-w-5xl mx-auto px-6 py-5">
+        <div class="flex flex-col items-center space-y-4">
+          <%# Names as site title %>
+          <%= link_to root_path, class: "no-underline" do %>
+            <h1 class="font-serif font-light text-3xl tracking-tight text-nasturtium-forest hover:text-nasturtium-sage transition-colors">
+              Ali & Brennan
+            </h1>
+          <% end %>
+
+          <%# Navigation links %>
+          <div class="flex items-center space-x-8 text-sm tracking-widest uppercase">
+            <%= link_to "Home", root_path,
+                class: "text-nasturtium-sage hover:text-nasturtium-forest transition-colors" %>
+            <%= link_to "Details", events_path,
+                class: "text-nasturtium-sage hover:text-nasturtium-forest transition-colors" %>
+            <%= link_to "Travel", travel_path,
+                class: "text-nasturtium-sage hover:text-nasturtium-forest transition-colors" %>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <%# ── Main Content ── %>
+    <main class="flex-1">
+      <% if notice.present? %>
+        <div class="max-w-3xl mx-auto px-6 pt-6">
+          <p class="text-nasturtium-forest bg-nasturtium-olive/10 border border-nasturtium-olive/30 rounded px-4 py-3 text-sm">
+            <%= notice %>
+          </p>
+        </div>
+      <% end %>
+
+      <% if alert.present? %>
+        <div class="max-w-3xl mx-auto px-6 pt-6">
+          <p class="text-nasturtium-red bg-nasturtium-red/5 border border-nasturtium-red/20 rounded px-4 py-3 text-sm">
+            <%= alert %>
+          </p>
+        </div>
+      <% end %>
+
+      <%= yield %>
+    </main>
+
+    <footer class="mt-auto text-center py-8 space-y-2 bg-nasturtium-cream border-t border-nasturtium-linen">
+      <p class="font-serif text-lg text-nasturtium-forest">Ali & Brennan</p>
+      <p class="text-xs tracking-widest uppercase text-nasturtium-sage">September 12, 2026 &middot; Lyons, Colorado</p>
+      <p class="text-xs text-nasturtium-sage mt-3">We can't wait to celebrate with you</p>
+    </footer>
+  </body>
+</html>

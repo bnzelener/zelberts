@@ -1,0 +1,58 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* ── Nasturtium Color Palette & Custom Theme ── */
+@theme {
+  /* Colors extracted from the nasturtium illustration */
+  --color-nasturtium-red: #E8533E;
+  --color-nasturtium-flame: #F07B4C;
+  --color-nasturtium-honey: #F0D44C;
+  --color-nasturtium-golden: #E8C83E;
+  --color-nasturtium-forest: #2D5A3D;
+  --color-nasturtium-sage: #3D7A4D;
+  --color-nasturtium-olive: #A4B84C;
+  --color-nasturtium-moss: #8CA83C;
+
+  /* Lighter/darker variants for backgrounds and borders */
+  --color-nasturtium-cream: #F7F4ED;
+  --color-nasturtium-linen: #F0EDE4;
+  --color-nasturtium-forest-light: #3D6E4D;
+  --color-nasturtium-forest-dark: #1E3D2A;
+
+  /* Font families */
+  --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-body: 'Lora', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Lora', Georgia, 'Times New Roman', serif;
+}
+
+/* ── Typography Plugin Customization ── */
+@layer base {
+  html {
+    font-family: var(--font-body);
+    color: var(--color-nasturtium-forest-dark);
+    background-color: var(--color-nasturtium-cream);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+  }
+}
+
+/* ── Prose (Typography Plugin) Overrides ── */
+.prose {
+  --tw-prose-body: var(--color-nasturtium-forest-dark);
+  --tw-prose-headings: var(--color-nasturtium-forest);
+  --tw-prose-links: var(--color-nasturtium-red);
+  --tw-prose-bold: var(--color-nasturtium-forest);
+  --tw-prose-quotes: var(--color-nasturtium-sage);
+  --tw-prose-quote-borders: var(--color-nasturtium-olive);
+  --tw-prose-counters: var(--color-nasturtium-sage);
+  --tw-prose-bullets: var(--color-nasturtium-olive);
+  --tw-prose-hr: var(--color-nasturtium-linen);
+}
+
+.prose :where(h1, h2, h3, h4):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  letter-spacing: -0.01em;
+}
