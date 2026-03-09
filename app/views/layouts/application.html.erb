@@ -28,22 +28,31 @@
     <%# ── Navigation ── %>
     <header class="border-b border-nasturtium-linen">
       <nav class="max-w-5xl mx-auto px-6 py-5">
-        <div class="flex flex-col items-center space-y-4">
-          <%# Names as site title %>
-          <%= link_to root_path, class: "no-underline" do %>
-            <h1 class="font-serif font-light text-3xl tracking-tight text-nasturtium-forest hover:text-nasturtium-sage transition-colors">
-              Ali & Brennan
-            </h1>
-          <% end %>
+        <div class="flex items-center justify-between">
+          <%# Left spacer for balance on desktop %>
+          <div class="hidden md:block w-24"></div>
 
-          <%# Navigation links %>
-          <div class="flex items-center space-x-8 text-sm tracking-widest uppercase">
-            <%= link_to "Home", root_path,
-                class: "text-nasturtium-sage hover:text-nasturtium-forest transition-colors" %>
-            <%= link_to "Details", events_path,
-                class: "text-nasturtium-sage hover:text-nasturtium-forest transition-colors" %>
-            <%= link_to "Travel", travel_path,
-                class: "text-nasturtium-sage hover:text-nasturtium-forest transition-colors" %>
+          <%# Center: Names + nav links %>
+          <div class="flex flex-col items-center space-y-4">
+            <%= link_to root_path, class: "no-underline" do %>
+              <h1 class="font-serif font-light text-3xl tracking-tight text-nasturtium-forest hover:text-nasturtium-sage transition-colors">
+                Ali & Brennan
+              </h1>
+            <% end %>
+
+            <div class="flex items-center space-x-8 text-sm tracking-widest uppercase">
+              <%= link_to "Home", root_path,
+                  class: "text-nasturtium-sage hover:text-nasturtium-forest transition-colors" %>
+              <%= link_to "Details", events_path,
+                  class: "text-nasturtium-sage hover:text-nasturtium-forest transition-colors" %>
+              <%= link_to "Travel", travel_path,
+                  class: "text-nasturtium-sage hover:text-nasturtium-forest transition-colors" %>
+            </div>
+          </div>
+
+          <%# Right: Vanagon icon %>
+          <div class="hidden md:block w-24">
+            <%= image_tag "vanagon.svg", alt: "Vanagon", class: "w-24 h-auto opacity-85" %>
           </div>
         </div>
       </nav>
