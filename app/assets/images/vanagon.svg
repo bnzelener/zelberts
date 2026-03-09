@@ -1,0 +1,155 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 300" fill="none">
+  <!-- VW T3 Vanagon Westfalia - side view facing left, pop-top raised -->
+
+  <!-- === POP-TOP ROOF === -->
+  <!-- Pop-top canvas/tent (angled, higher at rear) -->
+  <polygon points="72,108 305,108 295,42 82,58" fill="#F2E4A8" stroke="#2A2A2A" stroke-width="4" stroke-linejoin="round"/>
+  <!-- Canvas fold/wrinkle lines -->
+  <path d="M120,104 L125,62" stroke="#D4C480" stroke-width="1.8" fill="none"/>
+  <path d="M168,104 L172,58" stroke="#D4C480" stroke-width="1.8" fill="none"/>
+  <path d="M215,104 L218,54" stroke="#D4C480" stroke-width="1.8" fill="none"/>
+  <path d="M260,104 L262,48" stroke="#D4C480" stroke-width="1.8" fill="none"/>
+
+  <!-- Roof rack / hard top lid (angled) -->
+  <polygon points="78,58 295,42 300,34 74,50" fill="#9A9A9A" stroke="#2A2A2A" stroke-width="3.5" stroke-linejoin="round"/>
+  <!-- Rack rail highlight -->
+  <line x1="82" y1="54" x2="297" y2="38" stroke="#B5B5B5" stroke-width="2"/>
+  <!-- Cross bars on roof rack -->
+  <line x1="120" y1="52" x2="118" y2="44" stroke="#7A7A7A" stroke-width="3" stroke-linecap="round"/>
+  <line x1="180" y1="48" x2="178" y2="40" stroke="#7A7A7A" stroke-width="3" stroke-linecap="round"/>
+  <line x1="240" y1="44" x2="238" y2="36" stroke="#7A7A7A" stroke-width="3" stroke-linecap="round"/>
+  <!-- Long rail on top -->
+  <line x1="84" y1="50" x2="298" y2="34" stroke="#7A7A7A" stroke-width="3.5" stroke-linecap="round"/>
+
+  <!-- Support struts (thin lines from body to pop-top lid) -->
+  <line x1="76" y1="108" x2="74" y2="58" stroke="#2A2A2A" stroke-width="2.5"/>
+  <line x1="300" y1="108" x2="298" y2="42" stroke="#2A2A2A" stroke-width="2.5"/>
+
+  <!-- === MAIN VAN BODY === -->
+  <rect x="42" y="112" width="310" height="100" rx="3" fill="#F0B825" stroke="#2A2A2A" stroke-width="4"/>
+
+  <!-- Body color accent strip (darker lower panel) -->
+  <rect x="42" y="182" width="310" height="30" fill="#D9A520" stroke="#2A2A2A" stroke-width="3"/>
+
+  <!-- Mid-body trim line -->
+  <line x1="42" y1="176" x2="352" y2="176" stroke="#2A2A2A" stroke-width="2.5"/>
+
+  <!-- === FRONT (LEFT SIDE) === -->
+  <!-- Windshield (slightly angled) -->
+  <path d="M48,118 L48,170 L102,170 L106,118 Z" fill="#C4DEE8" stroke="#2A2A2A" stroke-width="3.5" stroke-linejoin="round"/>
+  <!-- Windshield center divider -->
+  <line x1="76" y1="118" x2="74" y2="170" stroke="#2A2A2A" stroke-width="2.5"/>
+  <!-- Windshield glare -->
+  <path d="M55,125 L55,155 L70,155 L72,125 Z" fill="#D8EBF2" opacity="0.5"/>
+
+  <!-- Front headlight -->
+  <ellipse cx="46" cy="148" rx="6" ry="9" fill="#F5F0D0" stroke="#2A2A2A" stroke-width="2.5"/>
+
+  <!-- Front turn signal -->
+  <rect x="40" y="162" width="10" height="7" rx="2" fill="#F0A020" stroke="#2A2A2A" stroke-width="1.8"/>
+
+  <!-- Small front reflector/marker -->
+  <rect x="40" y="186" width="6" height="4" rx="1" fill="#CC3030" stroke="#2A2A2A" stroke-width="1.2"/>
+
+  <!-- Front bumper -->
+  <path d="M30,198 L30,214 L60,214 L60,198 Z" fill="#888" stroke="#2A2A2A" stroke-width="3" stroke-linejoin="round"/>
+  <!-- Bumper extension/tow hook area -->
+  <rect x="25" y="202" width="10" height="8" rx="1" fill="#777" stroke="#2A2A2A" stroke-width="2"/>
+
+  <!-- === SIDE WINDOWS === -->
+  <!-- Front passenger window (two panes) -->
+  <rect x="112" y="118" width="54" height="52" rx="2" fill="#C4DEE8" stroke="#2A2A2A" stroke-width="3.5"/>
+  <!-- Window divider -->
+  <line x1="139" y1="118" x2="139" y2="170" stroke="#2A2A2A" stroke-width="2.5"/>
+  <!-- Window glare highlights -->
+  <rect x="116" y="124" width="8" height="32" rx="1" fill="#D8EBF2" opacity="0.4"/>
+  <rect x="143" y="124" width="8" height="32" rx="1" fill="#D8EBF2" opacity="0.4"/>
+
+  <!-- === SLIDING DOOR AREA (open, showing interior) === -->
+  <!-- Door frame opening -->
+  <rect x="172" y="118" width="70" height="76" fill="#888" stroke="#2A2A2A" stroke-width="3"/>
+  <!-- Interior visible through open door -->
+  <rect x="176" y="122" width="62" height="68" fill="#A0A0A0"/>
+  <!-- Interior details -->
+  <!-- Cabinet/counter -->
+  <rect x="176" y="148" width="30" height="42" fill="#B8B8B8" stroke="#2A2A2A" stroke-width="2"/>
+  <!-- Cabinet door -->
+  <rect x="180" y="152" width="22" height="16" fill="#CACACA" stroke="#2A2A2A" stroke-width="1.5" rx="1"/>
+  <!-- Door handle on cabinet -->
+  <rect x="188" y="158" width="6" height="3" rx="1" fill="#999" stroke="#2A2A2A" stroke-width="1"/>
+  <!-- Upper interior shelf/window area -->
+  <rect x="210" y="122" width="28" height="30" fill="#B0B0B0" stroke="#2A2A2A" stroke-width="1.5"/>
+  <!-- Curtain/fabric swoops inside -->
+  <path d="M212,125 Q220,140 218,150" stroke="#C8C8C8" stroke-width="2" fill="none"/>
+  <path d="M225,125 Q232,138 228,150" stroke="#C8C8C8" stroke-width="2" fill="none"/>
+
+  <!-- Door track rail (top) -->
+  <line x1="170" y1="116" x2="244" y2="116" stroke="#2A2A2A" stroke-width="3"/>
+
+  <!-- === REAR SECTION === -->
+  <!-- Rear quarter panel (solid yellow, no window, or small window) -->
+  <rect x="248" y="118" width="50" height="52" rx="2" fill="#F0B825" stroke="#2A2A2A" stroke-width="3"/>
+  <!-- Rear quarter window (small) -->
+  <rect x="254" y="122" width="38" height="28" rx="2" fill="#C4DEE8" stroke="#2A2A2A" stroke-width="2.5"/>
+  <!-- Window tint/pattern -->
+  <path d="M258,126 Q272,140 268,148" stroke="#D8EBF2" stroke-width="2" fill="none" opacity="0.5"/>
+
+  <!-- Rear panel -->
+  <rect x="302" y="112" width="50" height="100" rx="3" fill="#F0B825" stroke="#2A2A2A" stroke-width="3.5"/>
+  <!-- Rear window -->
+  <rect x="308" y="120" width="30" height="32" rx="2" fill="#C4DEE8" stroke="#2A2A2A" stroke-width="2.5"/>
+
+  <!-- Rear light cluster -->
+  <rect x="342" y="156" width="8" height="22" rx="2" fill="#CC3030" stroke="#2A2A2A" stroke-width="2"/>
+  <!-- Rear reflector -->
+  <rect x="344" y="182" width="5" height="10" rx="1" fill="#F0A020" stroke="#2A2A2A" stroke-width="1.2"/>
+
+  <!-- Engine vent grille (rear, T3 style) -->
+  <line x1="310" y1="165" x2="338" y2="165" stroke="#2A2A2A" stroke-width="1.5"/>
+  <line x1="310" y1="170" x2="338" y2="170" stroke="#2A2A2A" stroke-width="1.5"/>
+  <line x1="310" y1="175" x2="338" y2="175" stroke="#2A2A2A" stroke-width="1.5"/>
+
+  <!-- Rear bumper -->
+  <path d="M340,198 L340,214 L365,214 L365,198 Z" fill="#888" stroke="#2A2A2A" stroke-width="3" stroke-linejoin="round"/>
+
+  <!-- Rear license plate area -->
+  <rect x="316" y="188" width="22" height="12" rx="1" fill="#E8E8E8" stroke="#2A2A2A" stroke-width="1.5"/>
+
+  <!-- === WHEELS === -->
+  <!-- Front wheel -->
+  <circle cx="105" cy="228" r="30" fill="#3A3A3A" stroke="#2A2A2A" stroke-width="4"/>
+  <circle cx="105" cy="228" r="22" fill="#4A4A4A" stroke="#2A2A2A" stroke-width="2.5"/>
+  <!-- Tire tread hint -->
+  <circle cx="105" cy="228" r="27" fill="none" stroke="#333" stroke-width="2" stroke-dasharray="4,4"/>
+  <!-- Hub -->
+  <circle cx="105" cy="228" r="12" fill="#C0C0C0" stroke="#2A2A2A" stroke-width="2.5"/>
+  <circle cx="105" cy="228" r="5" fill="#999" stroke="#2A2A2A" stroke-width="1.5"/>
+
+  <!-- Rear wheel -->
+  <circle cx="305" cy="228" r="30" fill="#3A3A3A" stroke="#2A2A2A" stroke-width="4"/>
+  <circle cx="305" cy="228" r="22" fill="#4A4A4A" stroke="#2A2A2A" stroke-width="2.5"/>
+  <circle cx="305" cy="228" r="27" fill="none" stroke="#333" stroke-width="2" stroke-dasharray="4,4"/>
+  <circle cx="305" cy="228" r="12" fill="#C0C0C0" stroke="#2A2A2A" stroke-width="2.5"/>
+  <circle cx="305" cy="228" r="5" fill="#999" stroke="#2A2A2A" stroke-width="1.5"/>
+
+  <!-- Wheel well arches (body color covering top of wheels) -->
+  <path d="M68,212 Q105,185 142,212" fill="#F0B825" stroke="#2A2A2A" stroke-width="3.5"/>
+  <path d="M268,212 Q305,185 342,212" fill="#F0B825" stroke="#2A2A2A" stroke-width="3.5"/>
+
+  <!-- === GROUND LINE === -->
+  <line x1="15" y1="258" x2="400" y2="258" stroke="#2A2A2A" stroke-width="3.5" stroke-linecap="round"/>
+
+  <!-- === EXTRA DETAILS === -->
+  <!-- Side door handle (on sliding door track area) -->
+  <rect x="166" y="148" width="4" height="18" rx="1" fill="#777" stroke="#2A2A2A" stroke-width="1.5"/>
+
+  <!-- Drip rail above windows -->
+  <line x1="46" y1="114" x2="302" y2="114" stroke="#2A2A2A" stroke-width="2"/>
+
+  <!-- Antenna stub on roof edge -->
+  <line x1="90" y1="108" x2="86" y2="88" stroke="#2A2A2A" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Side body crease lines for dimension -->
+  <line x1="42" y1="145" x2="110" y2="145" stroke="#D9A520" stroke-width="1.5"/>
+  <line x1="248" y1="145" x2="302" y2="145" stroke="#D9A520" stroke-width="1.5"/>
+</svg>
