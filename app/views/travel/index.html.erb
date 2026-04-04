@@ -120,6 +120,7 @@
     var denver    = [39.8561, -104.6737];  // Denver International Airport
     var anchorage = [61.2181, -149.9003];  // Anchorage, AK
     var bayshore  = [40.7254, -73.2454];   // Bay Shore, Long Island, NY
+    var toronto   = [43.6532, -79.3832];   // Toronto, ON
 
     var map = L.map("travel-map", {
       scrollWheelZoom: false
@@ -155,6 +156,7 @@
     // Travel lines
     curvedLine(anchorage, denver, "#F07B4C").addTo(map);
     curvedLine(bayshore, denver, "#F07B4C").addTo(map);
+    curvedLine(toronto, denver, "#F07B4C").addTo(map);
 
     // Marker icon
     var markerIcon = L.divIcon({
@@ -171,9 +173,11 @@
       .bindPopup("<strong>Anchorage, AK</strong><br>Brennan's stomping grounds");
     L.marker(bayshore, { icon: markerIcon }).addTo(map)
       .bindPopup("<strong>Bay Shore, Long Island</strong><br>Ali's stomping grounds");
+    L.marker(toronto, { icon: markerIcon }).addTo(map)
+      .bindPopup("<strong>Toronto, ON</strong><br>Family from the north");
 
     // Fit map to show all points
-    var bounds = L.latLngBounds([denver, anchorage, bayshore]);
+    var bounds = L.latLngBounds([denver, anchorage, bayshore, toronto]);
     map.fitBounds(bounds, { padding: [30, 30] });
   })();
 </script>
