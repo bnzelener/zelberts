@@ -25,6 +25,7 @@
 <section style="background-color: #508A41; padding: 2.5rem 0;">
   <div style="max-width: 48rem; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0 0.75rem;">
     <%= image_tag "IMG_0022.JPG", alt: "Ali and Brennan", style: "flex: 1 1 0%; aspect-ratio: 1; object-fit: cover; border-radius: 4px; min-width: 0;" %>
+    <%= image_tag "4497b826-9d26-497e-851c-64d3d4a5c164.jpeg", alt: "Ali and Brennan", style: "flex: 1 1 0%; aspect-ratio: 1; object-fit: cover; border-radius: 4px; min-width: 0;" %>
     <%= image_tag "gallery-7.jpg", alt: "Ali and Brennan", style: "flex: 1 1 0%; aspect-ratio: 1; object-fit: cover; border-radius: 4px; min-width: 0;" %>
   </div>
 </section>
@@ -35,26 +36,16 @@
     <h2 class="font-serif font-light text-4xl mb-12">The Weekend</h2>
 
     <div class="grid md:grid-cols-3 gap-12">
-      <div>
-        <p class="text-xs tracking-[0.3em] uppercase text-nasturtium-olive mb-3">Friday</p>
-        <p class="font-serif font-light text-2xl mb-2">Welcome Drinks</p>
-        <p class="text-nasturtium-cream/70">September 11 &middot; 5:00 PM</p>
-        <p class="text-nasturtium-cream/50 text-sm mt-1">220 Main St, Lyons, CO</p>
-      </div>
-
-      <div>
-        <p class="text-xs tracking-[0.3em] uppercase text-nasturtium-olive mb-3">Saturday</p>
-        <p class="font-serif font-light text-2xl mb-2">Ceremony + Reception</p>
-        <p class="text-nasturtium-cream/70">September 12 &middot; 4:00 PM</p>
-        <p class="text-nasturtium-cream/50 text-sm mt-1">4121 Ute Hwy, Lyons, CO</p>
-      </div>
-
-      <div>
-        <p class="text-xs tracking-[0.3em] uppercase text-nasturtium-olive mb-3">Saturday Night</p>
-        <p class="font-serif font-light text-2xl mb-2">After Party</p>
-        <p class="text-nasturtium-cream/70">September 12 &middot; 10:00 PM</p>
-        <p class="text-nasturtium-cream/50 text-sm mt-1">450 Main St, Lyons, CO</p>
-      </div>
+      <% @events.each do |event| %>
+        <div>
+          <p class="text-xs tracking-[0.3em] uppercase text-nasturtium-olive mb-3"><%= event.date.strftime("%A") %></p>
+          <p class="font-serif font-light text-2xl mb-2"><%= event.name %></p>
+          <p class="text-nasturtium-cream/70"><%= event.date.strftime("%B %e") %> &middot; <%= event.time %></p>
+          <% if event.location.present? %>
+            <p class="text-nasturtium-cream/50 text-sm mt-1"><%= event.location %></p>
+          <% end %>
+        </div>
+      <% end %>
     </div>
 
     <div class="mt-12">
