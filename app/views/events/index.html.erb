@@ -3,20 +3,28 @@
   <h2 class="font-serif font-light text-4xl mb-12">Schedule</h2>
 
   <% if @events.any? %>
-    <div class="grid gap-12 md:grid-cols-3">
-      <% @events.each do |event| %>
-        <div>
-          <p class="text-xs tracking-[0.3em] uppercase text-nasturtium-olive mb-3"><%= event.name %></p>
-          <p class="font-serif font-light text-2xl mb-2"><%= event.date.strftime("%B %e, %Y") %></p>
-          <% if event.time.present? %>
-            <p class="text-nasturtium-cream/70"><%= event.time %></p>
-          <% end %>
-          <% if event.location.present? %>
-            <p class="text-nasturtium-cream/50 text-sm mt-1"><%= event.location %></p>
-          <% end %>
-          <% if event.address.present? %>
-            <p class="text-nasturtium-cream/50 text-sm mt-1"><%= event.address %></p>
-          <% end %>
+    <div class="grid gap-8 md:grid-cols-3">
+      <% @events.group_by(&:date).each do |date, events_on_day| %>
+        <div class="bg-nasturtium-cream text-nasturtium-forest rounded-lg p-8 text-left shadow-sm">
+          <p class="text-xs tracking-[0.3em] uppercase text-nasturtium-sage mb-2"><%= date.strftime("%A") %></p>
+          <p class="font-serif font-light text-2xl text-nasturtium-forest-dark mb-6"><%= date.strftime("%B %e, %Y") %></p>
+
+          <div class="space-y-6">
+            <% events_on_day.each_with_index do |event, idx| %>
+              <div <% if idx > 0 %>class="pt-6 border-t border-nasturtium-forest/15"<% end %>>
+                <p class="font-serif font-light text-xl text-nasturtium-forest mb-1"><%= event.name %></p>
+                <% if event.time.present? %>
+                  <p class="text-sm text-nasturtium-forest/80"><%= event.time %></p>
+                <% end %>
+                <% if event.location.present? %>
+                  <p class="text-sm text-nasturtium-forest/70 mt-1"><%= event.location %></p>
+                <% end %>
+                <% if event.address.present? %>
+                  <p class="text-xs text-nasturtium-forest/60 mt-1"><%= event.address %></p>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
         </div>
       <% end %>
     </div>
