@@ -25,7 +25,9 @@
           <tr class="border-b border-nasturtium-forest/20">
             <th class="py-3 pr-4 text-xs tracking-[0.2em] uppercase text-nasturtium-sage font-normal">Name</th>
             <th class="py-3 pr-4 text-xs tracking-[0.2em] uppercase text-nasturtium-sage font-normal">Group</th>
+            <th class="py-3 pr-4 text-xs tracking-[0.2em] uppercase text-nasturtium-sage font-normal">Address</th>
             <th class="py-3 pr-4 text-xs tracking-[0.2em] uppercase text-nasturtium-sage font-normal">Email</th>
+            <th class="py-3 pr-4 text-xs tracking-[0.2em] uppercase text-nasturtium-sage font-normal">Phone</th>
             <th class="py-3 pr-4 text-xs tracking-[0.2em] uppercase text-nasturtium-sage font-normal">Status</th>
             <th class="py-3 pr-4 text-xs tracking-[0.2em] uppercase text-nasturtium-sage font-normal">Dietary</th>
             <th class="py-3 pr-4 text-xs tracking-[0.2em] uppercase text-nasturtium-sage font-normal">Plus One</th>
@@ -37,7 +39,9 @@
             <tr class="border-b border-nasturtium-linen">
               <td class="py-4 pr-4 text-nasturtium-forest-dark font-medium"><%= guest.full_name %></td>
               <td class="py-4 pr-4 text-nasturtium-sage text-sm"><%= guest.invite_group&.name || "—" %></td>
+              <td class="py-4 pr-4 text-nasturtium-sage text-sm"><%= guest.invite_group&.address.presence || "—" %></td>
               <td class="py-4 pr-4 text-nasturtium-sage text-sm"><%= guest.invite_group&.email || "—" %></td>
+              <td class="py-4 pr-4 text-nasturtium-sage text-sm"><%= guest.phone.presence || "—" %></td>
               <td class="py-4 pr-4">
                 <% if guest.attending.nil? %>
                   <span class="text-nasturtium-golden text-sm">Pending</span>
