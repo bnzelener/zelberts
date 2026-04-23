@@ -3,7 +3,6 @@ class Guest < ApplicationRecord
 
   validates :first_name, presence: true
   validates :last_name, presence: true
-  validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :attending, inclusion: { in: [ true, false ] }, on: :update
 
   before_save :set_responded_at, if: -> { attending_changed? && attending != nil }

@@ -35,7 +35,7 @@
           <% @guests.each do |guest| %>
             <tr class="border-b border-nasturtium-linen">
               <td class="py-4 pr-4 text-nasturtium-forest-dark font-medium"><%= guest.full_name %></td>
-              <td class="py-4 pr-4 text-nasturtium-sage text-sm"><%= guest.email %></td>
+              <td class="py-4 pr-4 text-nasturtium-sage text-sm"><%= guest.invite_group&.email %></td>
               <td class="py-4 pr-4">
                 <% if guest.attending.nil? %>
                   <span class="text-nasturtium-golden text-sm">Pending</span>

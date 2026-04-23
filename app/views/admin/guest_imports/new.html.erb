@@ -20,7 +20,7 @@
       Paste CSV content below. The first row must be a header row with these exact columns:
     </p>
     <code class="block bg-gray-100 text-gray-800 text-xs px-3 py-2 rounded">
-      group_name,group_address,first_name,last_name,email,phone,dietary_notes
+      group_name,group_address,group_email,first_name,last_name,phone,dietary_notes
     </code>
     <p class="mt-3 text-xs text-gray-500">
       Guests sharing the same <code>group_name</code> are grouped together. If any row fails validation,
@@ -32,7 +32,7 @@
     <%= f.text_area :csv_text,
         value: @csv_text,
         rows: 16,
-        placeholder: "group_name,group_address,first_name,last_name,email,phone,dietary_notes\nSmith Family,123 Main St,Jane,Smith,jane@example.com,555-1234,vegetarian",
+        placeholder: "group_name,group_address,group_email,first_name,last_name,phone,dietary_notes\nSmith Family,123 Main St,jane@example.com,Jane,Smith,555-1234,vegetarian",
         class: "w-full font-mono text-xs border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400" %>
 
     <div class="flex items-center gap-3">

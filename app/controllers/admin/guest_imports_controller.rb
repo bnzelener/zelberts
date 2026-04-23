@@ -1,7 +1,7 @@
 require "csv"
 
 class Admin::GuestImportsController < Admin::BaseController
-  REQUIRED_HEADERS = %w[group_name group_address first_name last_name email phone dietary_notes].freeze
+  REQUIRED_HEADERS = %w[group_name group_address group_email first_name last_name phone dietary_notes].freeze
 
   def new
     @csv_text = ""
@@ -39,6 +39,7 @@ class Admin::GuestImportsController < Admin::BaseController
         line = idx + 2 # account for header row (1-indexed for humans)
         group_name = row["group_name"].to_s.strip
         group_address = row["group_address"].to_s.strip
+        group_email = row["group_email"].to_s.strip
 
         if group_name.blank?
           @errors << "Row #{line}: group_name is required"
@@ -48,6 +49,7 @@ class Admin::GuestImportsController < Admin::BaseController
         group = group_cache[group_name] ||= begin
           existing = InviteGroup.find_or_initialize_by(name: group_name)
           existing.address = group_address if existing.address.blank? && group_address.present?
+          existing.email = group_email if existing.email.blank? && group_email.present?
           unless existing.save
             @errors << "Row #{line}: invite group '#{group_name}' - #{existing.errors.full_messages.join(', ')}"
             raise ActiveRecord::Rollback
@@ -59,7 +61,6 @@ class Admin::GuestImportsController < Admin::BaseController
           invite_group: group,
           first_name: row["first_name"].to_s.strip,
           last_name: row["last_name"].to_s.strip,
-          email: row["email"].to_s.strip,
           phone: row["phone"].to_s.strip.presence,
           dietary_notes: row["dietary_notes"].to_s.strip.presence
         )
