@@ -11,9 +11,11 @@ Rails.application.routes.draw do
   # Static pages
   get "travel", to: "travel#index", as: :travel
 
-  # Admin
-  namespace :admin do
+  # Admin (intentionally not linked from public nav)
+  namespace :admin, path: "manage" do
     resources :guests, only: [ :index ]
+    resources :events, except: [ :show ]
+    root to: "events#index"
   end
 
   # Health check

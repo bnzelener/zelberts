@@ -1,6 +1,4 @@
-class Admin::GuestsController < ApplicationController
-  # TODO: Add authentication (http_basic_authenticate_with or Devise)
-
+class Admin::GuestsController < Admin::BaseController
   def index
     @guests = Guest.order(created_at: :desc)
     @attending_count = Guest.attending.count

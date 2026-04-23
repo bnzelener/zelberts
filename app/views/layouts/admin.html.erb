@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Admin &middot; Zelberts</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+  <body class="bg-gray-50 text-gray-900 min-h-screen">
+    <header class="bg-white border-b border-gray-200">
+      <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+        <h1 class="text-lg font-semibold tracking-tight">
+          <%= link_to "Admin", admin_root_path, class: "hover:text-gray-600" %>
+        </h1>
+        <nav class="flex items-center gap-6 text-sm">
+          <%= link_to "Schedule", admin_events_path, class: "text-gray-600 hover:text-gray-900" %>
+          <%= link_to "Guests", admin_guests_path, class: "text-gray-600 hover:text-gray-900" %>
+          <%= link_to "View site", root_path, class: "text-gray-400 hover:text-gray-600", target: "_blank" %>
+        </nav>
+      </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-6 py-10">
+      <% if notice %>
+        <div class="mb-6 rounded border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-800">
+          <%= notice %>
+        </div>
+      <% end %>
+      <% if alert %>
+        <div class="mb-6 rounded border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
+          <%= alert %>
+        </div>
+      <% end %>
+
+      <%= yield %>
+    </main>
+  </body>
+</html>

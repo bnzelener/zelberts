@@ -1,0 +1,6 @@
+<div class="flex items-center justify-between mb-8">
+  <h1 class="text-2xl font-semibold">New event</h1>
+  <%= link_to "Back", admin_events_path, class: "text-sm text-gray-600 hover:underline" %>
+</div>
+
+<%= render "form", event: @event %>
