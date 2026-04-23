@@ -30,29 +30,3 @@
   </div>
 </section>
 
-<%# ── Quick Details ── %>
-<section class="text-nasturtium-cream py-20" style="background-color: #508A41;">
-  <div class="max-w-5xl mx-auto px-6 text-center">
-    <h2 class="font-serif font-light text-4xl mb-12">The Weekend</h2>
-
-    <div class="grid md:grid-cols-3 gap-12">
-      <% @events.each do |event| %>
-        <div>
-          <p class="text-xs tracking-[0.3em] uppercase text-nasturtium-olive mb-3"><%= event.date.strftime("%A") %></p>
-          <p class="font-serif font-light text-2xl mb-2"><%= event.name %></p>
-          <p class="text-nasturtium-cream/70"><%= event.date.strftime("%B %e") %> &middot; <%= event.time %></p>
-          <% if event.location.present? %>
-            <p class="text-nasturtium-cream/50 text-sm mt-1"><%= event.location %></p>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
-
-    <div class="mt-12">
-      <%= link_to "View Full Details",
-          events_path,
-          class: "inline-block border border-nasturtium-cream/40 text-nasturtium-cream px-8 py-3 text-sm tracking-[0.2em] uppercase hover:bg-nasturtium-cream/10 transition-colors" %>
-    </div>
-  </div>
-</section>
-
