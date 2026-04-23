@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   # Admin (intentionally not linked from public nav)
   namespace :admin, path: "manage" do
     resources :guests, only: [ :index ]
+    resource :guest_import, only: [ :new, :create ]
     resources :events, except: [ :show ]
     root to: "events#index"
   end
