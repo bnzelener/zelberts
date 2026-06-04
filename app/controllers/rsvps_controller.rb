@@ -1,28 +1,19 @@
 class RsvpsController < ApplicationController
-  def new
-    @guest = Guest.new
+  def search
   end
 
-  def create
-    @guest = Guest.new(guest_params)
+  def results
+    @query = params[:q].to_s.strip
+    @groups = Guest.search_households(@query)
 
-    if @guest.save
-      redirect_to rsvp_path(@guest), notice: "Thank you for your RSVP!"
+    case @groups.count
+    when 0
+      flash.now[:alert] = "We couldn't find anyone by that name. Try just your last name, or reach out to us."
+      render :search
+    when 1
+      redirect_to form_invite_group_path(@groups.first)
     else
-      render :new, status: :unprocessable_entity
+      render :results
     end
-  end
-
-  def show
-    @guest = Guest.find(params[:id])
-  end
-
-  private
-
-  def guest_params
-    params.require(:guest).permit(
-      :first_name, :last_name, :email, :attending,
-      :meal_choice, :dietary_notes, :plus_one, :plus_one_name, :message
-    )
   end
 end

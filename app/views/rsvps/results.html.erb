@@ -1,0 +1,22 @@
+<% content_for :title, "RSVP" %>
+<section class="max-w-2xl mx-auto px-6 py-20">
+  <div class="text-center mb-12">
+    <h1 class="font-serif font-light text-5xl text-nasturtium-forest mb-2">Select your party</h1>
+    <div class="w-12 h-px bg-nasturtium-olive mx-auto mt-4 mb-6"></div>
+    <p class="text-nasturtium-sage text-lg">We found a few matches for &ldquo;<%= @query %>&rdquo;. Which one is you?</p>
+  </div>
+
+  <div class="space-y-4">
+    <% @groups.each do |group| %>
+      <%= link_to form_invite_group_path(group),
+            class: "block border border-nasturtium-forest/20 rounded p-6 hover:border-nasturtium-forest hover:bg-nasturtium-olive/5 transition-colors" do %>
+        <p class="text-nasturtium-forest-dark font-medium"><%= group.name %></p>
+        <p class="text-nasturtium-sage text-sm mt-1"><%= group.guests.map(&:full_name).join(", ") %></p>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="text-center mt-10">
+    <%= link_to "← Search again", rsvp_path, class: "text-nasturtium-sage hover:text-nasturtium-forest text-sm tracking-widest uppercase transition-colors" %>
+  </div>
+</section>

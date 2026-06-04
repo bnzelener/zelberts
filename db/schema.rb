@@ -10,9 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_03_06_024231) do
+ActiveRecord::Schema[7.2].define(version: 2026_06_04_041041) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "event_responses", force: :cascade do |t|
+    t.bigint "guest_id", null: false
+    t.bigint "event_id", null: false
+    t.boolean "attending", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_event_responses_on_event_id"
+    t.index ["guest_id", "event_id"], name: "index_event_responses_on_guest_id_and_event_id", unique: true
+    t.index ["guest_id"], name: "index_event_responses_on_guest_id"
+  end
 
   create_table "events", force: :cascade do |t|
     t.string "name"
@@ -29,9 +40,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_03_06_024231) do
   create_table "guests", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
-    t.string "email"
     t.boolean "attending"
-    t.string "meal_choice"
     t.text "dietary_notes"
     t.boolean "plus_one"
     t.string "plus_one_name"
@@ -39,5 +48,21 @@ ActiveRecord::Schema[7.2].define(version: 2026_03_06_024231) do
     t.datetime "responded_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "invite_group_id"
+    t.string "phone"
+    t.boolean "plus_one_allowed", default: false, null: false
+    t.index ["invite_group_id"], name: "index_guests_on_invite_group_id"
   end
+
+  create_table "invite_groups", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "email"
+  end
+
+  add_foreign_key "event_responses", "events"
+  add_foreign_key "event_responses", "guests"
+  add_foreign_key "guests", "invite_groups"
 end

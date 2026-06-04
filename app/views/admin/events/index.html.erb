@@ -14,6 +14,7 @@
           <th class="px-4 py-3">Date</th>
           <th class="px-4 py-3">Time</th>
           <th class="px-4 py-3">Location</th>
+          <th class="px-4 py-3 text-right">Attending</th>
           <th class="px-4 py-3 text-right">Actions</th>
         </tr>
       </thead>
@@ -21,11 +22,15 @@
         <% @events.each do |event| %>
           <tr>
             <td class="px-4 py-3 text-gray-500"><%= event.sort_order %></td>
-            <td class="px-4 py-3 font-medium"><%= event.name %></td>
+            <td class="px-4 py-3 font-medium">
+              <%= link_to event.name, admin_event_path(event), class: "text-blue-600 hover:underline" %>
+            </td>
             <td class="px-4 py-3"><%= event.date&.strftime("%b %e, %Y") %></td>
             <td class="px-4 py-3"><%= event.time %></td>
             <td class="px-4 py-3 text-gray-600"><%= event.location %></td>
+            <td class="px-4 py-3 text-right tabular-nums"><%= @attending_counts[event.id] || 0 %></td>
             <td class="px-4 py-3 text-right space-x-3">
+              <%= link_to "View", admin_event_path(event), class: "text-blue-600 hover:underline" %>
               <%= link_to "Edit", edit_admin_event_path(event), class: "text-blue-600 hover:underline" %>
               <%= button_to "Delete", admin_event_path(event),
                   method: :delete,

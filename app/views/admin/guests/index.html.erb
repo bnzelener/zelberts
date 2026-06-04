@@ -17,8 +17,81 @@
     </div>
   </div>
 
-  <%# Guest table %>
-  <% if @guests.any? %>
+  <%# Search %>
+  <%= form_with url: admin_guests_path, method: :get, class: "mb-6" do |f| %>
+    <%= f.hidden_field :view, value: @view %>
+    <div class="flex gap-3">
+      <%= f.search_field :q, value: @query, placeholder: "Search by name or email",
+            class: "flex-1 border-b border-nasturtium-forest/20 bg-transparent py-2 text-nasturtium-forest-dark font-body focus:border-nasturtium-forest focus:outline-none transition-colors" %>
+      <%= f.submit "Search",
+            class: "bg-nasturtium-forest text-nasturtium-cream px-6 py-2 text-xs tracking-[0.2em] uppercase hover:bg-nasturtium-forest-light transition-colors cursor-pointer" %>
+      <% if @query.present? %>
+        <%= link_to "Clear", admin_guests_path(view: @view),
+              class: "px-6 py-2 text-xs tracking-[0.2em] uppercase text-nasturtium-sage hover:text-nasturtium-forest self-center" %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% if @query.present? %>
+    <p class="text-nasturtium-sage text-sm mb-4">Showing results for &ldquo;<%= @query %>&rdquo;.</p>
+  <% end %>
+
+  <%# View toggle %>
+  <div class="inline-flex rounded border border-nasturtium-forest/20 overflow-hidden mb-6">
+    <%= link_to "By guest", admin_guests_path(view: "guests", q: @query.presence),
+          class: "px-4 py-2 text-xs tracking-[0.2em] uppercase #{@view == "guests" ? "bg-nasturtium-forest text-nasturtium-linen" : "text-nasturtium-sage hover:bg-nasturtium-olive/10"}" %>
+    <%= link_to "By group", admin_guests_path(view: "groups", q: @query.presence),
+          class: "px-4 py-2 text-xs tracking-[0.2em] uppercase #{@view == "groups" ? "bg-nasturtium-forest text-nasturtium-linen" : "text-nasturtium-sage hover:bg-nasturtium-olive/10"}" %>
+  </div>
+
+  <% if @view == "groups" %>
+    <%# Group table — one invite group per line %>
+    <% if @invite_groups.any? || @ungrouped_guests.any? %>
+      <div class="overflow-x-auto">
+        <table class="w-full text-left">
+          <thead>
+            <tr class="border-b border-nasturtium-forest/20">
+              <th class="py-3 pr-4 text-xs tracking-[0.2em] uppercase text-nasturtium-sage font-normal">Group</th>
+              <th class="py-3 pr-4 text-xs tracking-[0.2em] uppercase text-nasturtium-sage font-normal">Members</th>
+              <th class="py-3 pr-4 text-xs tracking-[0.2em] uppercase text-nasturtium-sage font-normal">Address</th>
+              <th class="py-3 pr-4 text-xs tracking-[0.2em] uppercase text-nasturtium-sage font-normal">Email</th>
+              <th class="py-3 text-xs tracking-[0.2em] uppercase text-nasturtium-sage font-normal">Responses</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @invite_groups.each do |group| %>
+              <tr class="border-b border-nasturtium-linen">
+                <td class="py-4 pr-4 text-nasturtium-forest-dark font-medium align-top"><%= group.name %></td>
+                <td class="py-4 pr-4 text-nasturtium-sage text-sm align-top"><%= group.guests.map(&:full_name).join(", ").presence || "—" %></td>
+                <td class="py-4 pr-4 text-nasturtium-sage text-sm align-top"><%= group.address.presence || "—" %></td>
+                <td class="py-4 pr-4 text-nasturtium-sage text-sm align-top"><%= group.email.presence || "—" %></td>
+                <td class="py-4 text-nasturtium-sage text-sm align-top">
+                  <%= group.guests.count(&:attending) %> attending ·
+                  <%= group.guests.count { |g| g.attending == false } %> declined ·
+                  <%= group.guests.count { |g| g.attending.nil? } %> pending
+                </td>
+              </tr>
+            <% end %>
+            <% @ungrouped_guests.each do |guest| %>
+              <tr class="border-b border-nasturtium-linen">
+                <td class="py-4 pr-4 text-nasturtium-sage italic align-top">No group</td>
+                <td class="py-4 pr-4 text-nasturtium-sage text-sm align-top"><%= guest.full_name %></td>
+                <td class="py-4 pr-4 text-nasturtium-sage text-sm align-top">—</td>
+                <td class="py-4 pr-4 text-nasturtium-sage text-sm align-top">—</td>
+                <td class="py-4 text-nasturtium-sage text-sm align-top">
+                  <% if guest.attending.nil? %>Pending<% elsif guest.attending? %>Attending<% else %>Declined<% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% else %>
+      <p class="text-nasturtium-sage text-center py-12"><%= @query.present? ? "No groups match your search." : "No groups yet." %></p>
+    <% end %>
+
+  <%# Guest table — one guest per line %>
+  <% elsif @guests.any? %>
     <div class="overflow-x-auto">
       <table class="w-full text-left">
         <thead>
@@ -31,7 +104,8 @@
             <th class="py-3 pr-4 text-xs tracking-[0.2em] uppercase text-nasturtium-sage font-normal">Status</th>
             <th class="py-3 pr-4 text-xs tracking-[0.2em] uppercase text-nasturtium-sage font-normal">Dietary</th>
             <th class="py-3 pr-4 text-xs tracking-[0.2em] uppercase text-nasturtium-sage font-normal">Plus One</th>
-            <th class="py-3 text-xs tracking-[0.2em] uppercase text-nasturtium-sage font-normal">Responded</th>
+            <th class="py-3 pr-4 text-xs tracking-[0.2em] uppercase text-nasturtium-sage font-normal">Responded</th>
+            <th class="py-3 text-xs tracking-[0.2em] uppercase text-nasturtium-sage font-normal"></th>
           </tr>
         </thead>
         <tbody>
@@ -52,14 +126,23 @@
                 <% end %>
               </td>
               <td class="py-4 pr-4 text-nasturtium-sage text-sm"><%= guest.dietary_notes.presence || "—" %></td>
-              <td class="py-4 pr-4 text-nasturtium-sage text-sm"><%= guest.plus_one? ? guest.plus_one_name : "—" %></td>
-              <td class="py-4 text-nasturtium-sage text-sm"><%= guest.responded_at&.strftime("%b %e, %Y") || "—" %></td>
+              <td class="py-4 pr-4 text-nasturtium-sage text-sm">
+                <% if guest.plus_one? && guest.plus_one_name.present? %>
+                  <%= guest.plus_one_name %>
+                <% elsif guest.plus_one_allowed? %>
+                  <span class="text-nasturtium-olive">Allowed</span>
+                <% else %>
+                  —
+                <% end %>
+              </td>
+              <td class="py-4 pr-4 text-nasturtium-sage text-sm"><%= guest.responded_at&.strftime("%b %e, %Y") || "—" %></td>
+              <td class="py-4 text-sm"><%= link_to "Edit", edit_admin_guest_path(guest), class: "text-nasturtium-forest hover:text-nasturtium-sage underline" %></td>
             </tr>
           <% end %>
         </tbody>
       </table>
     </div>
   <% else %>
-    <p class="text-nasturtium-sage text-center py-12">No responses yet.</p>
+    <p class="text-nasturtium-sage text-center py-12"><%= @query.present? ? "No guests match your search." : "No responses yet." %></p>
   <% end %>
 </section>

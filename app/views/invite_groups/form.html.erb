@@ -1,0 +1,93 @@
+<% content_for :title, "RSVP" %>
+<section class="max-w-2xl mx-auto px-6 py-20">
+  <div class="text-center mb-12">
+    <h1 class="font-serif font-light text-5xl text-nasturtium-forest mb-2">RSVP</h1>
+    <div class="w-12 h-px bg-nasturtium-olive mx-auto mt-4 mb-6"></div>
+    <p class="text-nasturtium-sage text-lg"><%= @invite_group.name %></p>
+    <p class="text-nasturtium-sage/70 text-sm mt-2">Please respond for everyone in your party.</p>
+  </div>
+
+  <% guest_errors = @invite_group.guests.flat_map { |g| g.errors.full_messages } %>
+  <% if guest_errors.any? %>
+    <div class="bg-nasturtium-red/5 border border-nasturtium-red/20 rounded p-4 mb-8">
+      <p class="text-nasturtium-red text-sm font-medium mb-2">Please correct the following:</p>
+      <ul class="list-disc list-inside text-nasturtium-red/80 text-sm space-y-1">
+        <% guest_errors.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form_with model: @invite_group, url: form_invite_group_path(@invite_group), method: :patch, class: "space-y-12" do |f| %>
+    <%= f.fields_for :guests do |gf| %>
+      <% guest = gf.object %>
+      <div data-controller="rsvp-guest" class="border-b border-nasturtium-linen pb-10 last:border-b-0">
+        <h2 class="font-serif text-2xl text-nasturtium-forest mb-5"><%= guest.full_name %></h2>
+
+        <%# Attending yes / no %>
+        <div class="flex flex-wrap gap-6">
+          <label class="flex items-center gap-3 cursor-pointer">
+            <%= gf.radio_button :attending, true,
+                class: "accent-nasturtium-forest w-4 h-4",
+                data: { action: "change->rsvp-guest#toggle" } %>
+            <span class="text-nasturtium-forest-dark">Joyfully accepts</span>
+          </label>
+          <label class="flex items-center gap-3 cursor-pointer">
+            <%= gf.radio_button :attending, false,
+                class: "accent-nasturtium-forest w-4 h-4",
+                data: { action: "change->rsvp-guest#toggle" } %>
+            <span class="text-nasturtium-forest-dark">Regretfully declines</span>
+          </label>
+        </div>
+
+        <%# Follow-ups, shown only when attending %>
+        <div data-rsvp-guest-target="followups" class="mt-8 space-y-7 <%= "hidden" unless guest.attending %>">
+          <div>
+            <p class="text-xs tracking-[0.2em] uppercase text-nasturtium-sage mb-4">Which events will you join us for?</p>
+            <div class="space-y-3">
+              <%= gf.fields_for :event_responses do |ef| %>
+                <label class="flex items-center gap-3 cursor-pointer">
+                  <%= ef.hidden_field :event_id %>
+                  <%= ef.check_box :attending, class: "accent-nasturtium-forest w-4 h-4" %>
+                  <span class="text-nasturtium-forest-dark"><%= ef.object.event.name %></span>
+                </label>
+              <% end %>
+            </div>
+          </div>
+
+          <div>
+            <%= gf.label :dietary_notes, "Dietary restrictions or allergies",
+                class: "block text-xs tracking-[0.2em] uppercase text-nasturtium-sage mb-2" %>
+            <%= gf.text_area :dietary_notes, rows: 2,
+                class: "w-full border-b border-nasturtium-forest/20 bg-transparent py-3 text-nasturtium-forest-dark font-body focus:border-nasturtium-forest focus:outline-none transition-colors resize-none",
+                placeholder: "Anything we should know about?" %>
+          </div>
+
+          <% if guest.plus_one_allowed? %>
+            <div>
+              <label class="flex items-center gap-3 cursor-pointer">
+                <%= gf.check_box :plus_one,
+                    class: "accent-nasturtium-forest w-4 h-4",
+                    data: { action: "change->rsvp-guest#togglePlusOne" } %>
+                <span class="text-nasturtium-forest-dark">I'll be bringing a guest</span>
+              </label>
+              <div data-rsvp-guest-target="plusOneFields" class="mt-4 <%= "hidden" unless guest.plus_one %>">
+                <%= gf.label :plus_one_name, "Guest name",
+                    class: "block text-xs tracking-[0.2em] uppercase text-nasturtium-sage mb-2" %>
+                <%= gf.text_field :plus_one_name,
+                    class: "w-full border-b border-nasturtium-forest/20 bg-transparent py-3 text-nasturtium-forest-dark font-body focus:border-nasturtium-forest focus:outline-none transition-colors",
+                    placeholder: "Your guest's full name" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="text-center pt-2">
+      <%= f.submit "Send RSVP",
+          class: "bg-nasturtium-forest text-nasturtium-cream px-12 py-4 text-sm tracking-[0.2em] uppercase hover:bg-nasturtium-forest-light transition-colors cursor-pointer" %>
+    </div>
+  <% end %>
+</section>

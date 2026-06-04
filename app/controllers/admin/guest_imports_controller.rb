@@ -62,7 +62,8 @@ class Admin::GuestImportsController < Admin::BaseController
           first_name: row["first_name"].to_s.strip,
           last_name: row["last_name"].to_s.strip,
           phone: row["phone"].to_s.strip.presence,
-          dietary_notes: row["dietary_notes"].to_s.strip.presence
+          dietary_notes: row["dietary_notes"].to_s.strip.presence,
+          plus_one_allowed: truthy?(row["plus_one_allowed"])
         )
 
         unless guest.save
@@ -86,5 +87,12 @@ class Admin::GuestImportsController < Admin::BaseController
       redirect_to admin_guests_path,
                   notice: "Imported #{guests_created} guest#{'s' unless guests_created == 1} across #{groups_created} invite group#{'s' unless groups_created == 1}."
     end
+  end
+
+  private
+
+  # Optional `plus_one_allowed` CSV column — blank/absent means not allowed.
+  def truthy?(value)
+    %w[true yes 1 y].include?(value.to_s.strip.downcase)
   end
 end

@@ -1,0 +1,55 @@
+<div class="flex items-center justify-between mb-8">
+  <h1 class="text-2xl font-semibold">Edit guest</h1>
+  <%= link_to "Back", admin_guests_path, class: "text-sm text-gray-600 hover:underline" %>
+</div>
+
+<%= form_with(model: [:admin, @guest], local: true, class: "space-y-5 bg-white border border-gray-200 rounded p-6") do |f| %>
+  <% if @guest.errors.any? %>
+    <div class="rounded border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800">
+      <p class="font-semibold mb-2"><%= pluralize(@guest.errors.count, "error") %> prevented saving:</p>
+      <ul class="list-disc list-inside">
+        <% @guest.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+    <div>
+      <%= f.label :first_name, class: "block text-sm font-medium mb-1" %>
+      <%= f.text_field :first_name, class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400" %>
+    </div>
+    <div>
+      <%= f.label :last_name, class: "block text-sm font-medium mb-1" %>
+      <%= f.text_field :last_name, class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400" %>
+    </div>
+  </div>
+
+  <div>
+    <%= f.label :invite_group_id, "Invite group", class: "block text-sm font-medium mb-1" %>
+    <%= f.collection_select :invite_group_id, InviteGroup.order(:name), :id, :name,
+        { include_blank: "— No group —" },
+        class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400" %>
+  </div>
+
+  <div>
+    <%= f.label :phone, class: "block text-sm font-medium mb-1" %>
+    <%= f.text_field :phone, class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400" %>
+  </div>
+
+  <div>
+    <%= f.label :dietary_notes, "Dietary notes", class: "block text-sm font-medium mb-1" %>
+    <%= f.text_area :dietary_notes, rows: 3, class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400" %>
+  </div>
+
+  <label class="flex items-center gap-3 pt-1">
+    <%= f.check_box :plus_one_allowed, class: "w-4 h-4" %>
+    <span class="text-sm font-medium">Allow this guest to bring a plus-one</span>
+  </label>
+
+  <div class="flex items-center gap-3 pt-2">
+    <%= f.submit "Save guest", class: "bg-gray-900 text-white text-sm px-4 py-2 rounded hover:bg-gray-700 cursor-pointer" %>
+    <%= link_to "Cancel", admin_guests_path, class: "text-sm text-gray-600 hover:underline" %>
+  </div>
+<% end %>

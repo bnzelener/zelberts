@@ -1,8 +1,16 @@
 class Admin::EventsController < Admin::BaseController
-  before_action :set_event, only: [ :edit, :update, :destroy ]
+  before_action :set_event, only: [ :show, :edit, :update, :destroy ]
 
   def index
     @events = Event.all
+    @attending_counts = EventResponse.where(attending: true).group(:event_id).count
+  end
+
+  def show
+    @attending_guests = Guest.joins(:event_responses)
+                             .where(event_responses: { event_id: @event.id, attending: true })
+                             .includes(:invite_group)
+                             .order(:last_name, :first_name)
   end
 
   def new
