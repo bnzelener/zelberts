@@ -31,13 +31,13 @@
             <%= gf.radio_button :attending, true,
                 class: "accent-nasturtium-forest w-4 h-4",
                 data: { action: "change->rsvp-guest#toggle" } %>
-            <span class="text-nasturtium-forest-dark">Joyfully accepts</span>
+            <span class="text-nasturtium-forest-dark">Will attend</span>
           </label>
           <label class="flex items-center gap-3 cursor-pointer">
             <%= gf.radio_button :attending, false,
                 class: "accent-nasturtium-forest w-4 h-4",
                 data: { action: "change->rsvp-guest#toggle" } %>
-            <span class="text-nasturtium-forest-dark">Regretfully declines</span>
+            <span class="text-nasturtium-forest-dark">Won't attend</span>
           </label>
         </div>
 
@@ -83,6 +83,10 @@
           <% end %>
         </div>
       </div>
+    <% end %>
+
+    <% if @invite_group.weecasa_included? %>
+      <%= render "weecasa_panel", group: @invite_group, f: f %>
     <% end %>
 
     <div class="text-center pt-2">

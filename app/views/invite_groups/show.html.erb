@@ -1,9 +1,14 @@
-<% content_for :title, "RSVP received" %>
+<% content_for :title, "RSVP" %>
+<% responded = @invite_group.guests.any? { |g| !g.attending.nil? } %>
 <section class="max-w-2xl mx-auto px-6 py-20">
   <div class="text-center mb-12">
-    <h1 class="font-serif font-light text-5xl text-nasturtium-forest mb-2">Thank you</h1>
+    <h1 class="font-serif font-light text-5xl text-nasturtium-forest mb-2"><%= @invite_group.name %></h1>
     <div class="w-12 h-px bg-nasturtium-olive mx-auto mt-4 mb-6"></div>
-    <p class="text-nasturtium-sage text-lg">Your RSVP has been received.</p>
+    <% if responded %>
+      <p class="text-nasturtium-sage text-lg">Here's your RSVP. You can update it anytime before August 10th.</p>
+    <% else %>
+      <p class="text-nasturtium-sage text-lg">We found your invitation — we'd love to know if you can join us.</p>
+    <% end %>
   </div>
 
   <div class="space-y-8">
@@ -35,8 +40,17 @@
     <% end %>
   </div>
 
+  <% if @invite_group.weecasa_included? %>
+    <%= render "weecasa_panel", group: @invite_group, f: nil %>
+  <% end %>
+
   <div class="text-center mt-12">
-    <%= link_to "Update my RSVP", form_invite_group_path(@invite_group),
-        class: "text-nasturtium-sage hover:text-nasturtium-forest text-sm tracking-widest uppercase transition-colors" %>
+    <% if responded %>
+      <%= link_to "Update my RSVP", form_invite_group_path(@invite_group),
+          class: "text-nasturtium-sage hover:text-nasturtium-forest text-sm tracking-widest uppercase transition-colors" %>
+    <% else %>
+      <%= link_to "RSVP now", form_invite_group_path(@invite_group),
+          class: "inline-block bg-nasturtium-forest text-nasturtium-cream px-12 py-4 text-sm tracking-[0.2em] uppercase hover:bg-nasturtium-forest-light transition-colors" %>
+    <% end %>
   </div>
 </section>

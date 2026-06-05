@@ -1,0 +1,40 @@
+<div class="flex items-center justify-between mb-6">
+  <h1 class="text-2xl font-semibold"><%= @invite_group.name %></h1>
+  <%= link_to "Back", admin_guests_path(view: "groups"), class: "text-sm text-gray-600 hover:underline" %>
+</div>
+
+<%# Group details %>
+<div class="bg-white border border-gray-200 rounded p-6 mb-6 space-y-2 text-sm">
+  <p><span class="text-gray-500">Email:</span> <%= @invite_group.email.presence || "—" %></p>
+  <p><span class="text-gray-500">Address:</span> <%= @invite_group.address.presence || "—" %></p>
+  <p><span class="text-gray-500">Members:</span> <%= @invite_group.guests.map(&:full_name).join(", ").presence || "—" %></p>
+</div>
+
+<%# WeeCasa tiny homes %>
+<div class="bg-white border border-gray-200 rounded p-6">
+  <h2 class="font-semibold mb-1">WeeCasa Tiny Homes</h2>
+  <p class="text-sm text-gray-500 mb-4">
+    When enabled, this group sees a WeeCasa stay panel at the bottom of their RSVP and can tell us
+    whether they'd like to stay in the tiny homes.
+  </p>
+
+  <%= form_with model: @invite_group, url: admin_invite_group_path(@invite_group), method: :patch, class: "flex items-center gap-4" do |f| %>
+    <label class="flex items-center gap-2 text-sm text-gray-800">
+      <%= f.check_box :weecasa_included, class: "w-4 h-4" %>
+      Include this group in the WeeCasa tiny home block
+    </label>
+    <%= f.submit "Save", class: "bg-gray-900 text-white px-4 py-2 text-xs uppercase tracking-wider rounded hover:bg-gray-700 cursor-pointer" %>
+  <% end %>
+
+  <p class="text-sm text-gray-500 mt-5">
+    <span class="font-medium text-gray-700">Group's response:</span>
+    <% case @invite_group.weecasa_response %>
+    <% when true %>
+      <span class="text-green-700">Yes — would like to stay in the tiny homes</span>
+    <% when false %>
+      <span class="text-gray-700">No, thank you</span>
+    <% else %>
+      <span class="text-amber-600">No response yet</span>
+    <% end %>
+  </p>
+</div>

@@ -1,5 +1,12 @@
 class InviteGroupsController < ApplicationController
-  before_action :set_group, only: [ :form, :submit, :confirmation ]
+  before_action :set_group, only: [ :show, :form, :submit ]
+
+  # The RSVP "show" page: a summary of the party's responses. Doubles as the
+  # post-submit confirmation and the landing page when someone looks up an
+  # existing RSVP.
+  def show
+    @events = Event.all
+  end
 
   def form
     @events = Event.all
@@ -8,17 +15,13 @@ class InviteGroupsController < ApplicationController
 
   def submit
     if @invite_group.update(invite_group_params)
-      redirect_to confirmation_invite_group_path(@invite_group)
+      redirect_to invite_group_path(@invite_group), notice: "Thank you! Your RSVP has been saved."
     else
       @events = Event.all
       build_missing_event_responses
       flash.now[:alert] = "Please review the highlighted fields below."
       render :form, status: :unprocessable_entity
     end
-  end
-
-  def confirmation
-    @events = Event.all
   end
 
   private
@@ -43,6 +46,7 @@ class InviteGroupsController < ApplicationController
 
   def invite_group_params
     params.require(:invite_group).permit(
+      :weecasa_response,
       guests_attributes: [
         :id, :attending, :dietary_notes, :plus_one, :plus_one_name,
         { event_responses_attributes: [ :id, :event_id, :attending ] }

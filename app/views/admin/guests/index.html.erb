@@ -61,7 +61,12 @@
           <tbody>
             <% @invite_groups.each do |group| %>
               <tr class="border-b border-nasturtium-linen">
-                <td class="py-4 pr-4 text-nasturtium-forest-dark font-medium align-top"><%= group.name %></td>
+                <td class="py-4 pr-4 text-nasturtium-forest-dark font-medium align-top">
+                  <%= link_to group.name, admin_invite_group_path(group), class: "text-nasturtium-forest hover:text-nasturtium-sage underline" %>
+                  <% if group.weecasa_included? %>
+                    <span class="ml-1 inline-block text-[10px] tracking-[0.15em] uppercase text-nasturtium-olive border border-nasturtium-olive/40 rounded px-1.5 py-0.5 align-middle">WeeCasa</span>
+                  <% end %>
+                </td>
                 <td class="py-4 pr-4 text-nasturtium-sage text-sm align-top"><%= group.guests.map(&:full_name).join(", ").presence || "—" %></td>
                 <td class="py-4 pr-4 text-nasturtium-sage text-sm align-top"><%= group.address.presence || "—" %></td>
                 <td class="py-4 pr-4 text-nasturtium-sage text-sm align-top"><%= group.email.presence || "—" %></td>

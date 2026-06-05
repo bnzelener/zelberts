@@ -8,7 +8,7 @@
 
   <div class="space-y-4">
     <% @groups.each do |group| %>
-      <%= link_to form_invite_group_path(group),
+      <%= link_to invite_group_path(group),
             class: "block border border-nasturtium-forest/20 rounded p-6 hover:border-nasturtium-forest hover:bg-nasturtium-olive/5 transition-colors" do %>
         <p class="text-nasturtium-forest-dark font-medium"><%= group.name %></p>
         <p class="text-nasturtium-sage text-sm mt-1"><%= group.guests.map(&:full_name).join(", ") %></p>

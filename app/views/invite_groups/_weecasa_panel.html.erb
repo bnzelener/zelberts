@@ -1,0 +1,54 @@
+<%#
+  WeeCasa stay panel shown at the bottom of a group's RSVP when the group is
+  part of the tiny-home block (weecasa_included).
+  Locals:
+    group - the InviteGroup
+    f     - form builder (present on the editable RSVP form; nil on the show page)
+%>
+<% f ||= nil %>
+<div class="mt-14 rounded border border-nasturtium-olive/30 bg-nasturtium-olive/5 overflow-hidden">
+  <div class="sm:flex">
+    <img src="https://images.squarespace-cdn.com/content/v1/65e0d4b8279536632bf6acf1/3f4b12dd-379d-4f4c-8581-3ce713c222f8/IMG_2767+copy.jpg?format=500w"
+         alt="A WeeCasa tiny home"
+         class="w-full h-40 sm:h-auto sm:w-44 object-cover shrink-0"
+         loading="lazy" />
+
+    <div class="p-6 flex-1">
+      <h3 class="font-serif text-2xl text-nasturtium-forest mb-3">WeeCasa Tiny Homes</h3>
+      <p class="text-nasturtium-forest-dark text-sm leading-relaxed mb-4">
+        We've reserved the WeeCasa Tiny House Resort in Lyons and have planned for you to stay in the
+        tiny homes with us on Friday and Saturday night.
+        <%= link_to "Learn more", weecasa_path, target: "_blank", rel: "noopener",
+              class: "text-nasturtium-forest font-medium underline decoration-nasturtium-olive/40 underline-offset-2 hover:text-nasturtium-olive transition-colors whitespace-nowrap" %>
+      </p>
+
+      <% if f %>
+        <p class="text-xs tracking-[0.2em] uppercase text-nasturtium-sage mb-3">
+          Would you like to stay in the tiny homes with us on Friday &amp; Saturday?
+        </p>
+        <div class="flex flex-wrap gap-6">
+          <label class="flex items-center gap-3 cursor-pointer">
+            <%= f.radio_button :weecasa_response, true, class: "accent-nasturtium-forest w-4 h-4" %>
+            <span class="text-nasturtium-forest-dark">Yes, we'd like to</span>
+          </label>
+          <label class="flex items-center gap-3 cursor-pointer">
+            <%= f.radio_button :weecasa_response, false, class: "accent-nasturtium-forest w-4 h-4" %>
+            <span class="text-nasturtium-forest-dark">No, thank you</span>
+          </label>
+        </div>
+      <% else %>
+        <p class="text-sm">
+          <span class="text-xs tracking-[0.2em] uppercase text-nasturtium-sage">Your response:</span>
+          <% case group.weecasa_response %>
+          <% when true %>
+            <span class="text-nasturtium-forest-dark">Yes — we'd like to stay in the tiny homes.</span>
+          <% when false %>
+            <span class="text-nasturtium-forest-dark">No, thank you.</span>
+          <% else %>
+            <span class="text-nasturtium-golden">No response yet.</span>
+          <% end %>
+        </p>
+      <% end %>
+    </div>
+  </div>
+</div>

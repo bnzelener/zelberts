@@ -11,7 +11,7 @@ class RsvpsController < ApplicationController
       flash.now[:alert] = "We couldn't find anyone by that name. Try just your last name, or reach out to us."
       render :search
     when 1
-      redirect_to form_invite_group_path(@groups.first)
+      redirect_to invite_group_path(@groups.first)
     else
       render :results
     end
