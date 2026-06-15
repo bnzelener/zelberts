@@ -1,6 +1,12 @@
 <div class="flex items-center justify-between mb-6">
   <h1 class="text-2xl font-semibold"><%= @invite_group.name %></h1>
-  <%= link_to "Back", admin_guests_path(view: "groups"), class: "text-sm text-gray-600 hover:underline" %>
+  <div class="flex items-center gap-4">
+    <%= link_to "Back", admin_guests_path(view: "groups"), class: "text-sm text-gray-600 hover:underline" %>
+    <%= button_to "Delete group", admin_invite_group_path(@invite_group),
+          method: :delete,
+          form: { data: { turbo_confirm: "Delete #{@invite_group.name}? This also deletes its #{@invite_group.guests.size} guest#{"s" unless @invite_group.guests.size == 1} and their responses. This cannot be undone." }, class: "inline" },
+          class: "text-sm text-red-600 hover:underline bg-transparent p-0 border-0 cursor-pointer" %>
+  </div>
 </div>
 
 <%# Group details %>

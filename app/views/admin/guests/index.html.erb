@@ -55,7 +55,8 @@
               <th class="py-3 pr-4 text-xs tracking-[0.2em] uppercase text-nasturtium-sage font-normal">Members</th>
               <th class="py-3 pr-4 text-xs tracking-[0.2em] uppercase text-nasturtium-sage font-normal">Address</th>
               <th class="py-3 pr-4 text-xs tracking-[0.2em] uppercase text-nasturtium-sage font-normal">Email</th>
-              <th class="py-3 text-xs tracking-[0.2em] uppercase text-nasturtium-sage font-normal">Responses</th>
+              <th class="py-3 pr-4 text-xs tracking-[0.2em] uppercase text-nasturtium-sage font-normal">Responses</th>
+              <th class="py-3 text-xs tracking-[0.2em] uppercase text-nasturtium-sage font-normal"></th>
             </tr>
           </thead>
           <tbody>
@@ -70,10 +71,16 @@
                 <td class="py-4 pr-4 text-nasturtium-sage text-sm align-top"><%= group.guests.map(&:full_name).join(", ").presence || "—" %></td>
                 <td class="py-4 pr-4 text-nasturtium-sage text-sm align-top"><%= group.address.presence || "—" %></td>
                 <td class="py-4 pr-4 text-nasturtium-sage text-sm align-top"><%= group.email.presence || "—" %></td>
-                <td class="py-4 text-nasturtium-sage text-sm align-top">
+                <td class="py-4 pr-4 text-nasturtium-sage text-sm align-top">
                   <%= group.guests.count(&:attending) %> attending ·
                   <%= group.guests.count { |g| g.attending == false } %> declined ·
                   <%= group.guests.count { |g| g.attending.nil? } %> pending
+                </td>
+                <td class="py-4 text-sm align-top">
+                  <%= button_to "Delete", admin_invite_group_path(group),
+                        method: :delete,
+                        form: { data: { turbo_confirm: "Delete #{group.name}? This also deletes its #{group.guests.size} guest#{"s" unless group.guests.size == 1} and their responses. This cannot be undone." }, class: "inline" },
+                        class: "text-nasturtium-red/80 hover:text-nasturtium-red hover:underline bg-transparent p-0 border-0 cursor-pointer" %>
                 </td>
               </tr>
             <% end %>
@@ -83,9 +90,10 @@
                 <td class="py-4 pr-4 text-nasturtium-sage text-sm align-top"><%= guest.full_name %></td>
                 <td class="py-4 pr-4 text-nasturtium-sage text-sm align-top">—</td>
                 <td class="py-4 pr-4 text-nasturtium-sage text-sm align-top">—</td>
-                <td class="py-4 text-nasturtium-sage text-sm align-top">
+                <td class="py-4 pr-4 text-nasturtium-sage text-sm align-top">
                   <% if guest.attending.nil? %>Pending<% elsif guest.attending? %>Attending<% else %>Declined<% end %>
                 </td>
+                <td class="py-4 text-sm align-top"></td>
               </tr>
             <% end %>
           </tbody>

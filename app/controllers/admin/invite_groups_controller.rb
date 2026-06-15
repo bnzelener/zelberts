@@ -1,5 +1,5 @@
 class Admin::InviteGroupsController < Admin::BaseController
-  before_action :set_group, only: [ :show, :update ]
+  before_action :set_group, only: [ :show, :update, :destroy ]
 
   def show
   end
@@ -10,6 +10,11 @@ class Admin::InviteGroupsController < Admin::BaseController
     else
       render :show, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @invite_group.destroy
+    redirect_to admin_guests_path(view: "groups"), notice: "Group and its guests deleted."
   end
 
   private
