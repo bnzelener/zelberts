@@ -14,7 +14,8 @@ class InviteGroupsController < ApplicationController
   end
 
   def submit
-    if @invite_group.update(invite_group_params)
+    @invite_group.assign_attributes(invite_group_params)
+    if @invite_group.save(context: :rsvp)
       redirect_to invite_group_path(@invite_group), notice: "Thank you! Your RSVP has been saved."
     else
       @events = Event.all

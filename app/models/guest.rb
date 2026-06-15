@@ -6,7 +6,9 @@ class Guest < ApplicationRecord
 
   validates :first_name, presence: true
   validates :last_name, presence: true
-  validates :attending, inclusion: { in: [ true, false ] }, on: :update
+  # Enforced only in the public RSVP flow (save(context: :rsvp)), not on
+  # admin edits where a guest may legitimately still be unanswered (nil).
+  validates :attending, inclusion: { in: [ true, false ] }, on: :rsvp
 
   before_save :clear_declined_followups
   before_save :set_responded_at, if: -> { attending_changed? && attending != nil }
