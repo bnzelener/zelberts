@@ -76,7 +76,8 @@
                   <%= group.guests.count { |g| g.attending == false } %> declined ·
                   <%= group.guests.count { |g| g.attending.nil? } %> pending
                 </td>
-                <td class="py-4 text-sm align-top">
+                <td class="py-4 text-sm align-top whitespace-nowrap">
+                  <%= link_to "Edit", edit_admin_invite_group_path(group), class: "text-nasturtium-forest hover:text-nasturtium-sage underline mr-3" %>
                   <%= button_to "Delete", admin_invite_group_path(group),
                         method: :delete,
                         form: { data: { turbo_confirm: "Delete #{group.name}? This also deletes its #{group.guests.size} guest#{"s" unless group.guests.size == 1} and their responses. This cannot be undone." }, class: "inline" },

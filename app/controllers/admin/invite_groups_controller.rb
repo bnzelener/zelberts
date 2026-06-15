@@ -1,14 +1,17 @@
 class Admin::InviteGroupsController < Admin::BaseController
-  before_action :set_group, only: [ :show, :update, :destroy ]
+  before_action :set_group, only: [ :show, :edit, :update, :destroy ]
 
   def show
+  end
+
+  def edit
   end
 
   def update
     if @invite_group.update(invite_group_params)
       redirect_to admin_invite_group_path(@invite_group), notice: "Group updated."
     else
-      render :show, status: :unprocessable_entity
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -24,6 +27,6 @@ class Admin::InviteGroupsController < Admin::BaseController
   end
 
   def invite_group_params
-    params.require(:invite_group).permit(:weecasa_included)
+    params.require(:invite_group).permit(:name, :address, :email, :weecasa_included)
   end
 end
