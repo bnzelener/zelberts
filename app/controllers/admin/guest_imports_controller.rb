@@ -1,7 +1,9 @@
 require "csv"
 
 class Admin::GuestImportsController < Admin::BaseController
-  REQUIRED_HEADERS = %w[group_name group_address group_email first_name last_name phone dietary_notes].freeze
+  # Only the columns we can't import without are required. group_address,
+  # group_email, phone, and dietary_notes are optional and may be left blank.
+  REQUIRED_HEADERS = %w[group_name first_name last_name].freeze
 
   def new
     @csv_text = ""

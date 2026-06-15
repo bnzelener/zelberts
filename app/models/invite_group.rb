@@ -4,5 +4,5 @@ class InviteGroup < ApplicationRecord
   accepts_nested_attributes_for :guests
 
   validates :name, presence: true
-  validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :email, allow_blank: true, format: { with: URI::MailTo::EMAIL_REGEXP }
 end

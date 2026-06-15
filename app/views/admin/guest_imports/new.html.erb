@@ -17,12 +17,15 @@
 <div class="bg-white border border-gray-200 rounded p-6">
   <div class="mb-4 text-sm text-gray-600">
     <p class="mb-2">
-      Paste CSV content below. The first row must be a header row with these exact columns:
+      Paste CSV content below. The first row must be a header row. These columns are recognized:
     </p>
     <code class="block bg-gray-100 text-gray-800 text-xs px-3 py-2 rounded">
       group_name,group_address,group_email,first_name,last_name,phone,dietary_notes
     </code>
     <p class="mt-3 text-xs text-gray-500">
+      Only <code>group_name</code>, <code>first_name</code>, and <code>last_name</code> are required.
+      <code>group_address</code>, <code>group_email</code>, <code>phone</code>, and <code>dietary_notes</code>
+      are optional &mdash; you can omit those columns entirely or leave individual cells blank.
       Guests sharing the same <code>group_name</code> are grouped together. If any row fails validation,
       the entire import is rolled back.
     </p>
