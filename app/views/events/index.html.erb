@@ -18,7 +18,7 @@
 
       <%# Days leading up to the wedding (e.g. Friday) — above "Our big day" %>
       <% before_days.each do |date, events_on_day| %>
-        <div class="pb-8 mb-8 border-b border-nasturtium-forest-dark/15 text-center">
+        <div class="text-center">
           <p class="text-xs tracking-[0.3em] uppercase text-nasturtium-forest-dark mb-1"><%= date.strftime("%A") %></p>
           <p class="font-serif font-light text-xl text-nasturtium-forest-dark mb-4"><%= "#{date.strftime('%B')} #{date.day.ordinalize}" %></p>
           <div class="space-y-6">
@@ -32,6 +32,10 @@
             <% end %>
           </div>
         </div>
+      <% end %>
+
+      <% if before_days.any? %>
+        <%= image_tag "flower-divider.png", alt: "", class: "h-8 w-auto mx-auto my-8" %>
       <% end %>
 
       <% if saturday_date %>
@@ -71,7 +75,8 @@
 
           <%# Remaining event(s) — left column, below the first event %>
           <% if rest_events.any? %>
-            <div class="space-y-6 pt-8 md:pt-6 border-t border-nasturtium-forest-dark/15">
+            <div class="space-y-6">
+              <%= image_tag "flower-divider.png", alt: "", class: "h-8 w-auto mx-auto mb-2" %>
               <% rest_events.each do |event| %>
                 <div>
                   <p class="font-serif font-light text-2xl text-nasturtium-forest-dark mb-1"><%= event.name %></p>
