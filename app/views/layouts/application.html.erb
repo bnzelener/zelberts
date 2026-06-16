@@ -10,10 +10,10 @@
 
     <%= yield :head %>
 
-    <%# Google Fonts: Playfair Display (thin headings) + Lora (body) %>
+    <%# Google Fonts: Lora (body). Headings use self-hosted TAN Meringue; accents use Beth Ellen. %>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
 
     <link rel="manifest" href="/manifest.json">
     <link rel="icon" href="/icon.png" type="image/png">
@@ -30,7 +30,7 @@
       <nav class="max-w-5xl mx-auto px-6 py-5">
         <div class="flex flex-col items-center space-y-4">
           <%= link_to root_path, class: "no-underline" do %>
-            <h1 class="font-serif font-light text-3xl tracking-tight text-nasturtium-forest hover:text-nasturtium-sage transition-colors">
+            <h1 class="font-script text-4xl leading-none text-nasturtium-magenta hover:text-nasturtium-forest transition-colors">
               Ali & Brennan
             </h1>
           <% end %>
@@ -71,9 +71,8 @@
     </main>
 
     <footer class="mt-auto text-center py-8 space-y-2 bg-nasturtium-cream border-t border-nasturtium-linen">
-      <p class="font-serif text-lg text-nasturtium-forest">Ali & Brennan</p>
+      <p class="font-script text-2xl text-nasturtium-magenta">Ali & Brennan</p>
       <p class="text-xs tracking-widest uppercase text-nasturtium-sage">September 12, 2026 &middot; Lyons, Colorado</p>
-      <p class="text-xs text-nasturtium-sage mt-3">We can't wait to celebrate with you</p>
     </footer>
   </body>
 </html>

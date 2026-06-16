@@ -1,26 +1,56 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
-/* ── Nasturtium Color Palette & Custom Theme ── */
+/* ── Self-hosted brand fonts ── */
+@font-face {
+  font-family: 'TAN Meringue';
+  src: url('/fonts/TANMeringue.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Beth Ellen';
+  src: url('/fonts/BethEllen-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── Brand Color Palette & Custom Theme ── */
 @theme {
-  /* Colors extracted from the nasturtium illustration */
-  --color-nasturtium-red: #E8533E;
-  --color-nasturtium-flame: #F07B4C;
-  --color-nasturtium-honey: #F0D44C;
-  --color-nasturtium-golden: #E8C83E;
-  --color-nasturtium-forest: #2D5A3D;
-  --color-nasturtium-sage: #3D7A4D;
-  --color-nasturtium-olive: #A4B84C;
-  --color-nasturtium-moss: #8CA83C;
+  /* Brand palette */
+  --color-cayenne: #FF1400;
+  --color-flower-pink: #FBBFE9;
+  --color-magenta: #D8579C;
+  --color-butter: #FAF28D;
+  --color-bright-green: #9FB525;
+  --color-chartreuse: #C4C726;
+  --color-dark-green: #3A8D36;
+  --color-orange: #F3A81C;
+
+  /* Semantic aliases (mapped onto the brand palette) */
+  --color-nasturtium-red: #FF1400;     /* Cayenne */
+  --color-nasturtium-flame: #F3A81C;   /* Orange */
+  --color-nasturtium-honey: #FAF28D;   /* Butter yellow */
+  --color-nasturtium-golden: #C4C726;  /* Chartreuse */
+  --color-nasturtium-forest: #3A8D36;  /* Dark Green */
+  --color-nasturtium-sage: #2F7A2C;    /* deeper green for small text */
+  --color-nasturtium-olive: #9FB525;   /* Bright green */
+  --color-nasturtium-moss: #C4C726;    /* Chartreuse */
+  --color-nasturtium-pink: #FBBFE9;    /* Center flower pink */
+  --color-nasturtium-magenta: #D8579C; /* a & z */
 
   /* Lighter/darker variants for backgrounds and borders */
   --color-nasturtium-cream: #F7F4ED;
   --color-nasturtium-linen: #F0EDE4;
-  --color-nasturtium-forest-light: #3D6E4D;
-  --color-nasturtium-forest-dark: #1E3D2A;
+  --color-nasturtium-forest-light: #4FA34A;
+  --color-nasturtium-forest-dark: #1F4D1B;
 
   /* Font families */
-  --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-serif: 'TAN Meringue', 'Playfair Display', Georgia, serif;
+  --font-script: 'Beth Ellen', 'Brush Script MT', cursive;
   --font-body: 'Lora', Georgia, 'Times New Roman', serif;
   --font-sans: 'Lora', Georgia, 'Times New Roman', serif;
 }
