@@ -15,26 +15,32 @@
         <p class="font-script text-3xl md:text-4xl text-nasturtium-magenta text-center mb-2">Our big day</p>
         <p class="font-serif font-light text-xl md:text-2xl text-nasturtium-forest-dark text-center mb-8"><%= "#{saturday_date.strftime('%A %B')} #{saturday_date.day.ordinalize}" %></p>
 
-        <div class="grid gap-10 md:grid-cols-2">
-          <div class="space-y-6">
-            <% saturday_events.each_with_index do |event, idx| %>
-              <div <% if idx > 0 %>class="pt-6 border-t border-nasturtium-forest/15"<% end %>>
-                <p class="font-serif font-light text-2xl text-nasturtium-forest-dark mb-1"><%= event.name %></p>
-                <% if event.time.present? %>
-                  <p class="text-sm text-nasturtium-forest-dark"><%= event.time %></p>
-                <% end %>
-                <% if event.location.present? %>
-                  <p class="text-sm text-nasturtium-forest-dark mt-1"><%= event.location %></p>
-                <% end %>
-                <% if event.address.present? %>
-                  <p class="text-xs text-nasturtium-forest-dark mt-1"><%= event.address %></p>
-                <% end %>
-              </div>
+        <%#
+          On mobile this stacks in source order: first event (Ceremony + Reception),
+          then Details, then the remaining event(s) (After Party). On md+ the Details
+          block spans both rows of the right column, so the events stay together in
+          the left column and Details sits alongside them on the right.
+        %>
+        <div class="grid gap-8 md:grid-cols-2 md:gap-x-10 md:gap-y-6">
+          <% first_event = saturday_events.first %>
+          <% rest_events = saturday_events.drop(1) %>
+
+          <%# First event — left column, top row %>
+          <div>
+            <p class="font-serif font-light text-2xl text-nasturtium-forest-dark mb-1"><%= first_event.name %></p>
+            <% if first_event.time.present? %>
+              <p class="text-sm text-nasturtium-forest-dark"><%= first_event.time %></p>
+            <% end %>
+            <% if first_event.location.present? %>
+              <p class="text-sm text-nasturtium-forest-dark mt-1"><%= first_event.location %></p>
+            <% end %>
+            <% if first_event.address.present? %>
+              <p class="text-xs text-nasturtium-forest-dark mt-1"><%= first_event.address %></p>
             <% end %>
           </div>
 
-          <%# ── Spot for more details ── %>
-          <div class="md:border-l md:border-nasturtium-forest/15 md:pl-10">
+          <%# ── Spot for more details — right column on md+, between events on mobile ── %>
+          <div class="md:row-span-2 pt-8 border-t border-nasturtium-forest-dark/15 md:pt-0 md:border-t-0 md:border-l md:border-nasturtium-forest-dark/15 md:pl-10">
             <p class="text-xs tracking-[0.3em] uppercase text-nasturtium-forest-dark mb-4">Details</p>
             <p class="text-sm text-nasturtium-forest-dark leading-relaxed">
               Ceremony begins promptly at 4&nbsp;pm. Please arrive no later than 3:45&nbsp;pm.
@@ -44,6 +50,26 @@
               your best garden disco chic!
             </p>
           </div>
+
+          <%# Remaining event(s) — left column, below the first event %>
+          <% if rest_events.any? %>
+            <div class="space-y-6 pt-8 md:pt-6 border-t border-nasturtium-forest-dark/15">
+              <% rest_events.each do |event| %>
+                <div>
+                  <p class="font-serif font-light text-2xl text-nasturtium-forest-dark mb-1"><%= event.name %></p>
+                  <% if event.time.present? %>
+                    <p class="text-sm text-nasturtium-forest-dark"><%= event.time %></p>
+                  <% end %>
+                  <% if event.location.present? %>
+                    <p class="text-sm text-nasturtium-forest-dark mt-1"><%= event.location %></p>
+                  <% end %>
+                  <% if event.address.present? %>
+                    <p class="text-xs text-nasturtium-forest-dark mt-1"><%= event.address %></p>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
         </div>
       </div>
     <% end %>
