@@ -21,10 +21,19 @@
   </div>
 </section>
 
-<%# ── Photo Gallery ── %>
-<section style="background-color: #FAF28D; padding: 2.5rem 0;">
-  <div style="max-width: 36rem; margin: 0 auto; padding: 0 0.75rem;">
-    <%= image_tag "IMG_0022.JPG", alt: "Ali and Brennan", style: "width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 4px;" %>
+<%# ── Photo + Details ── %>
+<section style="background-color: #FAF28D;" class="py-16">
+  <div class="max-w-5xl mx-auto px-6 flex flex-col md:flex-row md:items-center gap-10">
+    <div class="md:w-1/2">
+      <%= image_tag "IMG_0022.JPG", alt: "Ali and Brennan", style: "width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 4px;" %>
+    </div>
+
+    <div class="md:w-1/2 text-nasturtium-forest-dark">
+      <h2 class="font-serif font-light text-3xl md:text-4xl text-nasturtium-forest mb-6">The Farmette in Lyons, Colorado</h2>
+      <p class="font-body text-lg leading-relaxed mb-3">Ceremony to begin at 4pm. Please arrive no later than 3:45 pm.</p>
+      <p class="font-body text-lg leading-relaxed mb-6">Attire is semi-formal garden party.</p>
+      <p class="font-script text-2xl md:text-3xl leading-snug text-nasturtium-magenta">We got engaged in a field of flowers &mdash; now it's time to party among the flowers with us!</p>
+    </div>
   </div>
 </section>
 
