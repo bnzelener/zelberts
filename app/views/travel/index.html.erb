@@ -15,10 +15,12 @@
     </div>
   </div>
 
-  <%# ── Leaflet Map ── %>
+  <%# ── Leaflet Map (hidden for now) ── %>
+  <%#
   <div class="mb-16">
     <div id="travel-map" class="w-full h-80 rounded border border-nasturtium-linen z-0"></div>
   </div>
+  %>
 
   <%# Shuttle Info %>
   <div class="mb-16 text-center">
@@ -96,6 +98,7 @@
   </div>
 </section>
 
+<% if false # Leaflet map hidden for now %>
 <%# ── Leaflet CSS & JS from CDN ── %>
 <% content_for :head do %>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -182,3 +185,4 @@
     map.fitBounds(bounds, { padding: [30, 30] });
   })();
 </script>
+<% end %>
