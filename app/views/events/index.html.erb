@@ -13,8 +13,6 @@
     <% before_days = saturday_date ? events_by_day.select { |d, _| d < saturday_date } : events_by_day %>
     <% after_days  = saturday_date ? events_by_day.select { |d, _| d > saturday_date } : {} %>
 
-    <p class="font-script text-3xl md:text-4xl text-nasturtium-honey text-center mb-8">Extend the celebrations with us</p>
-
     <%# ── One cream box: lead-up days, then the wedding, then any later days ── %>
     <div class="bg-nasturtium-cream text-nasturtium-forest-dark rounded-lg p-8 md:p-12 text-left shadow-md md:max-w-3xl md:mx-auto">
 
