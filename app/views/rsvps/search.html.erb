@@ -13,7 +13,7 @@
           <%= f.text_field :q, value: @query,
               autofocus: true,
               class: "w-full border-b border-nasturtium-forest/20 bg-transparent py-3 text-nasturtium-forest-dark font-body focus:border-nasturtium-forest focus:outline-none transition-colors",
-              placeholder: "First and last name" %>
+              placeholder: "Enter your last name" %>
           <% if @query.present? %>
             <p class="text-nasturtium-sage/70 text-sm mt-2">Can't find yourself? Try just your last name.</p>
           <% end %>
