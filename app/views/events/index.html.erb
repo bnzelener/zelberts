@@ -36,16 +36,11 @@
           <%# ── Spot for more details ── %>
           <div class="md:border-l md:border-nasturtium-forest/15 md:pl-10">
             <p class="text-xs tracking-[0.3em] uppercase text-nasturtium-sage mb-4">Details</p>
-            <% saturday_details = saturday_events.map(&:description).compact_blank %>
-            <% if saturday_details.any? %>
-              <div class="space-y-4">
-                <% saturday_details.each do |detail| %>
-                  <p class="text-sm text-nasturtium-forest-dark/80 leading-relaxed"><%= simple_format(detail) %></p>
-                <% end %>
-              </div>
-            <% else %>
-              <p class="text-sm text-nasturtium-forest-dark/60 leading-relaxed">More details coming soon.</p>
-            <% end %>
+            <p class="text-sm text-nasturtium-forest-dark/80 leading-relaxed">
+              Ceremony begins promptly at 4&nbsp;pm. Please arrive no later than 3:45&nbsp;pm.
+              Cocktails, dinner, dancing, and celebrating among the flowers to follow.
+              Bring your dancing shoes!
+            </p>
           </div>
         </div>
       </div>
