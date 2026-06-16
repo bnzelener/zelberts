@@ -1,5 +1,5 @@
 <%# ── Hero Section ── %>
-<section class="relative min-h-[80vh] flex items-end justify-end overflow-hidden">
+<section class="relative min-h-[80vh] overflow-hidden">
   <%# Nasturtium illustration as hero background %>
   <div class="absolute inset-0 z-0">
     <%= image_tag "zelberts-header.png",
@@ -7,9 +7,9 @@
         class: "w-full h-full object-cover object-center" %>
   </div>
 
-  <div class="relative z-10 text-right px-10 pb-12 pt-24">
+  <div class="absolute z-10 bottom-0 right-0 text-right px-6 md:px-10 pb-28 md:pb-40">
     <h1 class="font-serif font-light text-4xl md:text-6xl tracking-tight text-nasturtium-cream" style="text-shadow: 0 2px 8px rgba(30, 61, 42, 0.5);">
-      Ali & Brennan
+      Ali &<br class="md:hidden"> Brennan
     </h1>
   </div>
 </section>
@@ -23,8 +23,7 @@
 
     <div class="md:w-1/2 text-nasturtium-forest-dark">
       <h2 class="font-serif font-light text-3xl md:text-4xl text-nasturtium-forest-dark mb-6">Welcome to Colorado!</h2>
-      <p class="font-body text-lg leading-relaxed mb-3">Ceremony to begin at 4pm. Please arrive no later than 3:45 pm.</p>
-      <p class="font-body text-lg leading-relaxed">Attire is semi-formal garden party.</p>
+      <p class="font-body text-lg leading-relaxed">We can't wait to bring our family and friends together in this state that we each fell in love with, and then fell in love with each other in!</p>
     </div>
   </div>
 </section>
