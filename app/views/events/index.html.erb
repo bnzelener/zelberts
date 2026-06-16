@@ -11,23 +11,23 @@
     <%# ── Saturday — featured above Friday & Sunday, larger with room for details ── %>
     <% if saturday_day.present? %>
       <% saturday_date, saturday_events = saturday_day %>
-      <div class="bg-nasturtium-cream text-nasturtium-forest rounded-lg p-8 md:p-12 text-left shadow-md mb-8 md:max-w-3xl md:mx-auto">
-        <p class="font-script text-3xl md:text-4xl text-nasturtium-magenta text-center mb-2">Our big day</p>
+      <div class="bg-nasturtium-cream text-nasturtium-forest-dark rounded-lg p-8 md:p-12 text-left shadow-md mb-8 md:max-w-3xl md:mx-auto">
+        <p class="font-script text-3xl md:text-4xl text-nasturtium-forest-dark text-center mb-2">Our big day</p>
         <p class="font-serif font-light text-xl md:text-2xl text-nasturtium-forest-dark text-center mb-8"><%= "#{saturday_date.strftime('%A %B')} #{saturday_date.day.ordinalize}" %></p>
 
         <div class="grid gap-10 md:grid-cols-2">
           <div class="space-y-6">
             <% saturday_events.each_with_index do |event, idx| %>
               <div <% if idx > 0 %>class="pt-6 border-t border-nasturtium-forest/15"<% end %>>
-                <p class="font-serif font-light text-2xl text-nasturtium-forest mb-1"><%= event.name %></p>
+                <p class="font-serif font-light text-2xl text-nasturtium-forest-dark mb-1"><%= event.name %></p>
                 <% if event.time.present? %>
-                  <p class="text-sm text-nasturtium-forest/80"><%= event.time %></p>
+                  <p class="text-sm text-nasturtium-forest-dark"><%= event.time %></p>
                 <% end %>
                 <% if event.location.present? %>
-                  <p class="text-sm text-nasturtium-forest/70 mt-1"><%= event.location %></p>
+                  <p class="text-sm text-nasturtium-forest-dark mt-1"><%= event.location %></p>
                 <% end %>
                 <% if event.address.present? %>
-                  <p class="text-xs text-nasturtium-forest/60 mt-1"><%= event.address %></p>
+                  <p class="text-xs text-nasturtium-forest-dark mt-1"><%= event.address %></p>
                 <% end %>
               </div>
             <% end %>
@@ -35,11 +35,11 @@
 
           <%# ── Spot for more details ── %>
           <div class="md:border-l md:border-nasturtium-forest/15 md:pl-10">
-            <p class="text-xs tracking-[0.3em] uppercase text-nasturtium-sage mb-4">Details</p>
-            <p class="text-sm text-nasturtium-forest-dark/80 leading-relaxed">
+            <p class="text-xs tracking-[0.3em] uppercase text-nasturtium-forest-dark mb-4">Details</p>
+            <p class="text-sm text-nasturtium-forest-dark leading-relaxed">
               Ceremony begins promptly at 4&nbsp;pm. Please arrive no later than 3:45&nbsp;pm.
             </p>
-            <p class="text-sm text-nasturtium-forest-dark/80 leading-relaxed mt-4">
+            <p class="text-sm text-nasturtium-forest-dark leading-relaxed mt-4">
               Semi-formal garden party attire. Think bright colors and floral patterns &mdash;
               your best garden disco chic!
             </p>
@@ -52,22 +52,22 @@
     <% if other_days.any? %>
       <div class="grid gap-8 md:grid-cols-2 md:max-w-3xl md:mx-auto">
         <% other_days.each do |date, events_on_day| %>
-          <div class="bg-nasturtium-cream text-nasturtium-forest rounded-lg p-8 text-left shadow-sm">
-            <p class="text-xs tracking-[0.3em] uppercase text-nasturtium-sage mb-2"><%= date.strftime("%A") %></p>
+          <div class="bg-nasturtium-cream text-nasturtium-forest-dark rounded-lg p-8 text-left shadow-sm">
+            <p class="text-xs tracking-[0.3em] uppercase text-nasturtium-forest-dark mb-2"><%= date.strftime("%A") %></p>
             <p class="font-serif font-light text-2xl text-nasturtium-forest-dark mb-6"><%= date.strftime("%B %e, %Y") %></p>
 
             <div class="space-y-6">
               <% events_on_day.each_with_index do |event, idx| %>
                 <div <% if idx > 0 %>class="pt-6 border-t border-nasturtium-forest/15"<% end %>>
-                  <p class="font-serif font-light text-xl text-nasturtium-forest mb-1"><%= event.name %></p>
+                  <p class="font-serif font-light text-xl text-nasturtium-forest-dark mb-1"><%= event.name %></p>
                   <% if event.time.present? %>
-                    <p class="text-sm text-nasturtium-forest/80"><%= event.time %></p>
+                    <p class="text-sm text-nasturtium-forest-dark"><%= event.time %></p>
                   <% end %>
                   <% if event.location.present? %>
-                    <p class="text-sm text-nasturtium-forest/70 mt-1"><%= event.location %></p>
+                    <p class="text-sm text-nasturtium-forest-dark mt-1"><%= event.location %></p>
                   <% end %>
                   <% if event.address.present? %>
-                    <p class="text-xs text-nasturtium-forest/60 mt-1"><%= event.address %></p>
+                    <p class="text-xs text-nasturtium-forest-dark mt-1"><%= event.address %></p>
                   <% end %>
                 </div>
               <% end %>
@@ -77,7 +77,7 @@
       </div>
     <% end %>
   <% else %>
-    <div class="text-center text-nasturtium-forest-dark/80">
+    <div class="text-center text-nasturtium-forest-dark">
       <p class="text-lg">Details are coming soon. Please check back!</p>
     </div>
   <% end %>
@@ -91,9 +91,9 @@
       <details class="group border border-nasturtium-forest/25 rounded">
         <summary class="flex items-center justify-between cursor-pointer px-6 py-4 text-left font-serif text-lg text-nasturtium-forest-dark select-none">
           Are kids invited?
-          <span class="ml-4 transition-transform duration-200 group-open:rotate-45 text-nasturtium-forest/50 text-2xl leading-none">+</span>
+          <span class="ml-4 transition-transform duration-200 group-open:rotate-45 text-nasturtium-forest-dark text-2xl leading-none">+</span>
         </summary>
-        <div class="px-6 pb-5 text-nasturtium-forest-dark/80 text-sm leading-relaxed">
+        <div class="px-6 pb-5 text-nasturtium-forest-dark text-sm leading-relaxed">
           While we love your kids and want to see them soon, we've planned our wedding as an adult party and kindly ask that you do not bring kids to the wedding.
         </div>
       </details>
@@ -101,9 +101,9 @@
       <details class="group border border-nasturtium-forest/25 rounded">
         <summary class="flex items-center justify-between cursor-pointer px-6 py-4 text-left font-serif text-lg text-nasturtium-forest-dark select-none">
           What's the dress code?
-          <span class="ml-4 transition-transform duration-200 group-open:rotate-45 text-nasturtium-forest/50 text-2xl leading-none">+</span>
+          <span class="ml-4 transition-transform duration-200 group-open:rotate-45 text-nasturtium-forest-dark text-2xl leading-none">+</span>
         </summary>
-        <div class="px-6 pb-5 text-nasturtium-forest-dark/80 text-sm leading-relaxed">
+        <div class="px-6 pb-5 text-nasturtium-forest-dark text-sm leading-relaxed">
           Semi-formal garden party (summer cocktail attire). September in Colorado is warm in the afternoon &mdash; likely in the high 70s or low 80s. The venue is mostly grass and gravel, so prepare your footwear accordingly.
         </div>
       </details>
