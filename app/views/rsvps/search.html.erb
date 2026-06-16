@@ -6,6 +6,9 @@
     <p class="text-nasturtium-sage text-lg">Find your invitation to let us know if you can make it.</p>
   </div>
 
+  <%= image_tag "gallery-7.jpg", alt: "Ali and Brennan dancing",
+      class: "w-full rounded mb-12 shadow-sm" %>
+
   <%= form_with url: rsvp_search_path, method: :get, class: "space-y-8" do |f| %>
     <div>
       <%= f.label :q, "Your name", class: "block text-xs tracking-[0.2em] uppercase text-nasturtium-sage mb-2" %>
