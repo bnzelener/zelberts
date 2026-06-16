@@ -1,0 +1,12 @@
+{
+  "ignored_warnings": [
+    {
+      "fingerprint": "21ab0fe00fdd5899ffc405cff75aadb91b805ee996a614f7e27b08a287e9062d",
+      "check_name": "EOLRails",
+      "message": "Support for Rails 7.2.3 ends on 2026-08-09",
+      "file": "Gemfile.lock",
+      "note": "Rails 7.2 EOL is 2026-08-09; a Rails upgrade is tracked separately. Not an exploitable vulnerability."
+    }
+  ],
+  "brakeman_version": "8.0.5"
+}
