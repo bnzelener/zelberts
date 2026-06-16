@@ -4,16 +4,22 @@
   <%= image_tag "flower-divider.png", alt: "", class: "h-8 w-auto mx-auto mb-12" %>
 
   <% if @events.any? %>
-    <div class="grid gap-8 md:grid-cols-3">
-      <% @events.group_by(&:date).each do |date, events_on_day| %>
-        <div class="bg-nasturtium-cream text-nasturtium-forest rounded-lg p-8 text-left shadow-sm">
-          <p class="text-xs tracking-[0.3em] uppercase text-nasturtium-sage mb-2"><%= date.strftime("%A") %></p>
-          <p class="font-serif font-light text-2xl text-nasturtium-forest-dark mb-6"><%= date.strftime("%B %e, %Y") %></p>
+    <% events_by_day = @events.group_by(&:date) %>
+    <% saturday_day = events_by_day.find { |date, _| date.strftime("%A") == "Saturday" } %>
+    <% other_days = events_by_day.reject { |date, _| date.strftime("%A") == "Saturday" } %>
 
+    <%# ── Saturday — featured above Friday & Sunday, larger with room for details ── %>
+    <% if saturday_day.present? %>
+      <% saturday_date, saturday_events = saturday_day %>
+      <div class="bg-nasturtium-cream text-nasturtium-forest rounded-lg p-8 md:p-12 text-left shadow-md mb-8 md:max-w-3xl md:mx-auto">
+        <p class="text-xs tracking-[0.3em] uppercase text-nasturtium-sage mb-2"><%= saturday_date.strftime("%A") %></p>
+        <p class="font-serif font-light text-3xl md:text-4xl text-nasturtium-forest-dark mb-8"><%= saturday_date.strftime("%B %e, %Y") %></p>
+
+        <div class="grid gap-10 md:grid-cols-2">
           <div class="space-y-6">
-            <% events_on_day.each_with_index do |event, idx| %>
+            <% saturday_events.each_with_index do |event, idx| %>
               <div <% if idx > 0 %>class="pt-6 border-t border-nasturtium-forest/15"<% end %>>
-                <p class="font-serif font-light text-xl text-nasturtium-forest mb-1"><%= event.name %></p>
+                <p class="font-serif font-light text-2xl text-nasturtium-forest mb-1"><%= event.name %></p>
                 <% if event.time.present? %>
                   <p class="text-sm text-nasturtium-forest/80"><%= event.time %></p>
                 <% end %>
@@ -26,9 +32,53 @@
               </div>
             <% end %>
           </div>
+
+          <%# ── Spot for more details ── %>
+          <div class="md:border-l md:border-nasturtium-forest/15 md:pl-10">
+            <p class="text-xs tracking-[0.3em] uppercase text-nasturtium-sage mb-4">Details</p>
+            <% saturday_details = saturday_events.map(&:description).compact_blank %>
+            <% if saturday_details.any? %>
+              <div class="space-y-4">
+                <% saturday_details.each do |detail| %>
+                  <p class="text-sm text-nasturtium-forest-dark/80 leading-relaxed"><%= simple_format(detail) %></p>
+                <% end %>
+              </div>
+            <% else %>
+              <p class="text-sm text-nasturtium-forest-dark/60 leading-relaxed">More details coming soon.</p>
+            <% end %>
+          </div>
         </div>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
+
+    <%# ── Friday & Sunday ── %>
+    <% if other_days.any? %>
+      <div class="grid gap-8 md:grid-cols-2 md:max-w-3xl md:mx-auto">
+        <% other_days.each do |date, events_on_day| %>
+          <div class="bg-nasturtium-cream text-nasturtium-forest rounded-lg p-8 text-left shadow-sm">
+            <p class="text-xs tracking-[0.3em] uppercase text-nasturtium-sage mb-2"><%= date.strftime("%A") %></p>
+            <p class="font-serif font-light text-2xl text-nasturtium-forest-dark mb-6"><%= date.strftime("%B %e, %Y") %></p>
+
+            <div class="space-y-6">
+              <% events_on_day.each_with_index do |event, idx| %>
+                <div <% if idx > 0 %>class="pt-6 border-t border-nasturtium-forest/15"<% end %>>
+                  <p class="font-serif font-light text-xl text-nasturtium-forest mb-1"><%= event.name %></p>
+                  <% if event.time.present? %>
+                    <p class="text-sm text-nasturtium-forest/80"><%= event.time %></p>
+                  <% end %>
+                  <% if event.location.present? %>
+                    <p class="text-sm text-nasturtium-forest/70 mt-1"><%= event.location %></p>
+                  <% end %>
+                  <% if event.address.present? %>
+                    <p class="text-xs text-nasturtium-forest/60 mt-1"><%= event.address %></p>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
   <% else %>
     <div class="text-center text-nasturtium-forest-dark/80">
       <p class="text-lg">Details are coming soon. Please check back!</p>
