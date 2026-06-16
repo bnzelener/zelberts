@@ -18,7 +18,7 @@
 
       <%# Days leading up to the wedding (e.g. Friday) — above "Our big day" %>
       <% before_days.each do |date, events_on_day| %>
-        <div class="pb-8 mb-8 border-b border-nasturtium-forest-dark/15">
+        <div class="pb-8 mb-8 border-b border-nasturtium-forest-dark/15 text-center">
           <p class="text-xs tracking-[0.3em] uppercase text-nasturtium-forest-dark mb-1"><%= date.strftime("%A") %></p>
           <p class="font-serif font-light text-xl text-nasturtium-forest-dark mb-4"><%= "#{date.strftime('%B')} #{date.day.ordinalize}" %></p>
           <div class="space-y-6">
@@ -87,7 +87,7 @@
 
       <%# Days after the wedding (e.g. Sunday) — below the Saturday details %>
       <% after_days.each do |date, events_on_day| %>
-        <div class="pt-8 mt-8 border-t border-nasturtium-forest-dark/15">
+        <div class="pt-8 mt-8 border-t border-nasturtium-forest-dark/15 text-center">
           <p class="text-xs tracking-[0.3em] uppercase text-nasturtium-forest-dark mb-1"><%= date.strftime("%A") %></p>
           <p class="font-serif font-light text-xl text-nasturtium-forest-dark mb-4"><%= "#{date.strftime('%B')} #{date.day.ordinalize}" %></p>
           <div class="space-y-6">
