@@ -12,8 +12,8 @@
     <% if saturday_day.present? %>
       <% saturday_date, saturday_events = saturday_day %>
       <div class="bg-nasturtium-cream text-nasturtium-forest rounded-lg p-8 md:p-12 text-left shadow-md mb-8 md:max-w-3xl md:mx-auto">
-        <p class="font-script text-4xl md:text-5xl text-nasturtium-magenta text-center mb-2">Our big day</p>
-        <p class="font-serif font-light text-2xl md:text-3xl text-nasturtium-forest-dark text-center mb-8"><%= "#{saturday_date.strftime('%A %B')} #{saturday_date.day.ordinalize}" %></p>
+        <p class="font-script text-3xl md:text-4xl text-nasturtium-magenta text-center mb-2">Our big day</p>
+        <p class="font-serif font-light text-xl md:text-2xl text-nasturtium-forest-dark text-center mb-8"><%= "#{saturday_date.strftime('%A %B')} #{saturday_date.day.ordinalize}" %></p>
 
         <div class="grid gap-10 md:grid-cols-2">
           <div class="space-y-6">
