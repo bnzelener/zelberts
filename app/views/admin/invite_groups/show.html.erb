@@ -13,7 +13,6 @@
 <%# Group details %>
 <div class="bg-white border border-gray-200 rounded p-6 mb-6 space-y-2 text-sm">
   <p><span class="text-gray-500">Email:</span> <%= @invite_group.email.presence || "—" %></p>
-  <p><span class="text-gray-500">Address:</span> <%= @invite_group.address.presence || "—" %></p>
   <p>
     <span class="text-gray-500">Members:</span>
     <% if @invite_group.guests.any? %>

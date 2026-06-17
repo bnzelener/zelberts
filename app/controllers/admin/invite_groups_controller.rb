@@ -27,6 +27,6 @@ class Admin::InviteGroupsController < Admin::BaseController
   end
 
   def invite_group_params
-    params.require(:invite_group).permit(:name, :address, :email, :weecasa_included, :weecasa_response)
+    params.require(:invite_group).permit(:name, :email, :weecasa_included, :weecasa_response)
   end
 end

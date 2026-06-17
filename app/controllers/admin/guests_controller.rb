@@ -5,12 +5,18 @@ class Admin::GuestsController < Admin::BaseController
     @view = params[:view] == "groups" ? "groups" : "guests"
     @query = params[:q].to_s.strip
 
-    @guests = Guest.includes(:invite_group, :plus_one_guest, :plus_one_host).order(created_at: :desc)
+    # Lead with guests who have responded (most recent first); pending fall to
+    # the bottom.
+    @guests = Guest.includes(:invite_group, :plus_one_guest, :plus_one_host)
+                   .order(Arel.sql("guests.responded_at DESC NULLS LAST"))
+                   .order(created_at: :desc)
     @guests = @guests.merge(Guest.search(@query)) if @query.present?
 
     if @view == "groups"
-      @invite_groups = InviteGroup.includes(:guests).order(:name)
-      @ungrouped_guests = Guest.where(invite_group_id: nil).order(:last_name)
+      @invite_groups = InviteGroup.includes(:guests)
+      @ungrouped_guests = Guest.where(invite_group_id: nil)
+                               .order(Arel.sql("responded_at DESC NULLS LAST"))
+                               .order(:last_name)
       if @query.present?
         matching_group_ids = Guest.search(@query).where.not(invite_group_id: nil).distinct.pluck(:invite_group_id)
         term = "%#{@query.downcase}%"
@@ -19,6 +25,11 @@ class Admin::GuestsController < Admin::BaseController
           t: term, ids: matching_group_ids.presence || [ -1 ]
         )
         @ungrouped_guests = @ungrouped_guests.merge(Guest.search(@query))
+      end
+
+      # Lead with groups that have at least one response, then alphabetically.
+      @invite_groups = @invite_groups.to_a.sort_by do |group|
+        [ group.guests.any? { |g| g.responded_at.present? } ? 0 : 1, group.name.to_s.downcase ]
       end
     end
 

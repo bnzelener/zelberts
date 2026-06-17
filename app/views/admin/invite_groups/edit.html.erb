@@ -25,11 +25,6 @@
     <%= f.email_field :email, class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400" %>
   </div>
 
-  <div>
-    <%= f.label :address, class: "block text-sm font-medium mb-1" %>
-    <%= f.text_field :address, class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400" %>
-  </div>
-
   <div class="flex items-center gap-3 pt-2">
     <%= f.submit "Save group", class: "bg-gray-900 text-white text-sm px-4 py-2 rounded hover:bg-gray-700 cursor-pointer" %>
     <%= link_to "Cancel", admin_invite_group_path(@invite_group), class: "text-sm text-gray-600 hover:underline" %>

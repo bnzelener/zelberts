@@ -1,8 +1,8 @@
 require "csv"
 
 class Admin::GuestImportsController < Admin::BaseController
-  # Only the columns we can't import without are required. group_address,
-  # group_email, phone, and dietary_notes are optional and may be left blank.
+  # Only the columns we can't import without are required. group_email, phone,
+  # and dietary_notes are optional and may be left blank.
   REQUIRED_HEADERS = %w[group_name first_name last_name].freeze
 
   def new
@@ -40,7 +40,6 @@ class Admin::GuestImportsController < Admin::BaseController
       rows.each_with_index do |row, idx|
         line = idx + 2 # account for header row (1-indexed for humans)
         group_name = row["group_name"].to_s.strip
-        group_address = row["group_address"].to_s.strip
         group_email = row["group_email"].to_s.strip
 
         if group_name.blank?
@@ -50,7 +49,6 @@ class Admin::GuestImportsController < Admin::BaseController
 
         group = group_cache[group_name] ||= begin
           existing = InviteGroup.find_or_initialize_by(name: group_name)
-          existing.address = group_address if existing.address.blank? && group_address.present?
           existing.email = group_email if existing.email.blank? && group_email.present?
           unless existing.save
             @errors << "Row #{line}: invite group '#{group_name}' - #{existing.errors.full_messages.join(', ')}"
