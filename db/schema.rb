@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_06_05_152018) do
+ActiveRecord::Schema[7.2].define(version: 2026_06_17_030000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -43,7 +43,6 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_05_152018) do
     t.boolean "attending"
     t.text "dietary_notes"
     t.boolean "plus_one"
-    t.string "plus_one_name"
     t.text "message"
     t.datetime "responded_at"
     t.datetime "created_at", null: false
@@ -51,7 +50,9 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_05_152018) do
     t.bigint "invite_group_id"
     t.string "phone"
     t.boolean "plus_one_allowed", default: false, null: false
+    t.bigint "plus_one_host_id"
     t.index ["invite_group_id"], name: "index_guests_on_invite_group_id"
+    t.index ["plus_one_host_id"], name: "index_guests_on_plus_one_host_id"
   end
 
   create_table "invite_groups", force: :cascade do |t|
@@ -62,9 +63,11 @@ ActiveRecord::Schema[7.2].define(version: 2026_06_05_152018) do
     t.string "email"
     t.boolean "weecasa_included", default: false, null: false
     t.boolean "weecasa_response"
+    t.boolean "email_opt_in", default: false, null: false
   end
 
   add_foreign_key "event_responses", "events"
   add_foreign_key "event_responses", "guests"
+  add_foreign_key "guests", "guests", column: "plus_one_host_id"
   add_foreign_key "guests", "invite_groups"
 end
