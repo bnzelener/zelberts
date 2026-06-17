@@ -12,7 +12,7 @@
   </div>
 
   <div class="space-y-8">
-    <% @invite_group.guests.each do |guest| %>
+    <% @invite_group.guests.select { |g| g.plus_one_host_id.nil? }.each do |guest| %>
       <div class="border-b border-nasturtium-linen pb-6 last:border-b-0">
         <div class="flex items-baseline justify-between">
           <h2 class="font-serif text-xl text-nasturtium-forest"><%= guest.full_name %></h2>
@@ -32,8 +32,8 @@
           <% else %>
             <p class="text-nasturtium-sage/70 text-sm mt-2">No events selected yet.</p>
           <% end %>
-          <% if guest.plus_one? && guest.plus_one_name.present? %>
-            <p class="text-nasturtium-sage text-sm mt-1">Plus one: <%= guest.plus_one_name %></p>
+          <% if guest.plus_one_guest.present? %>
+            <p class="text-nasturtium-sage text-sm mt-1">Plus one: <%= guest.plus_one_guest.full_name %></p>
           <% end %>
         <% end %>
       </div>

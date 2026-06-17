@@ -20,7 +20,7 @@
   <% end %>
 
   <%= form_with model: @invite_group, url: form_invite_group_path(@invite_group), method: :patch, class: "space-y-12" do |f| %>
-    <%= f.fields_for :guests do |gf| %>
+    <%= f.fields_for :guests, @invite_group.guests.select { |g| g.plus_one_host_id.nil? } do |gf| %>
       <% guest = gf.object %>
       <div data-controller="rsvp-guest" class="border-b border-nasturtium-linen pb-10 last:border-b-0">
         <h2 class="font-serif text-2xl text-nasturtium-forest mb-5"><%= guest.full_name %></h2>
@@ -72,12 +72,21 @@
                     data: { action: "change->rsvp-guest#togglePlusOne" } %>
                 <span class="text-nasturtium-forest-dark">I'll be bringing a guest</span>
               </label>
-              <div data-rsvp-guest-target="plusOneFields" class="mt-4 <%= "hidden" unless guest.plus_one %>">
-                <%= gf.label :plus_one_name, "Guest name",
-                    class: "block text-xs tracking-[0.2em] uppercase text-nasturtium-sage mb-2" %>
-                <%= gf.text_field :plus_one_name,
-                    class: "w-full border-b border-nasturtium-forest/20 bg-transparent py-3 text-nasturtium-forest-dark font-body focus:border-nasturtium-forest focus:outline-none transition-colors",
-                    placeholder: "Your guest's full name" %>
+              <div data-rsvp-guest-target="plusOneFields" class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4 <%= "hidden" unless guest.plus_one %>">
+                <div>
+                  <%= gf.label :plus_one_first_name, "Guest first name",
+                      class: "block text-xs tracking-[0.2em] uppercase text-nasturtium-sage mb-2" %>
+                  <%= gf.text_field :plus_one_first_name,
+                      class: "w-full border-b border-nasturtium-forest/20 bg-transparent py-3 text-nasturtium-forest-dark font-body focus:border-nasturtium-forest focus:outline-none transition-colors",
+                      placeholder: "First name" %>
+                </div>
+                <div>
+                  <%= gf.label :plus_one_last_name, "Guest last name",
+                      class: "block text-xs tracking-[0.2em] uppercase text-nasturtium-sage mb-2" %>
+                  <%= gf.text_field :plus_one_last_name,
+                      class: "w-full border-b border-nasturtium-forest/20 bg-transparent py-3 text-nasturtium-forest-dark font-body focus:border-nasturtium-forest focus:outline-none transition-colors",
+                      placeholder: "Last name" %>
+                </div>
               </div>
             </div>
           <% end %>

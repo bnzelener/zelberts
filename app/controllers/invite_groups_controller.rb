@@ -36,7 +36,7 @@ class InviteGroupsController < ApplicationController
   # newly built ones have no id (→ INSERT on submit).
   def build_missing_event_responses
     events = Event.all.to_a
-    @invite_group.guests.each do |guest|
+    @invite_group.guests.select { |g| g.plus_one_host_id.nil? }.each do |guest|
       existing_event_ids = guest.event_responses.map(&:event_id)
       events.each do |event|
         next if existing_event_ids.include?(event.id)
@@ -49,7 +49,8 @@ class InviteGroupsController < ApplicationController
     params.require(:invite_group).permit(
       :weecasa_response,
       guests_attributes: [
-        :id, :attending, :dietary_notes, :plus_one, :plus_one_name,
+        :id, :attending, :dietary_notes, :plus_one,
+        :plus_one_first_name, :plus_one_last_name,
         { event_responses_attributes: [ :id, :event_id, :attending ] }
       ]
     )
