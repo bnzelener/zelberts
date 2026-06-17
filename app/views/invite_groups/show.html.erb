@@ -40,6 +40,12 @@
     <% end %>
   </div>
 
+  <% if @invite_group.email.present? %>
+    <p class="text-nasturtium-sage/70 text-sm text-center mt-8">
+      We'll send wedding updates to <%= @invite_group.email %>.
+    </p>
+  <% end %>
+
   <% if @invite_group.weecasa_included? %>
     <%= render "weecasa_panel", group: @invite_group, f: nil %>
   <% end %>

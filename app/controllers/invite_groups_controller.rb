@@ -15,6 +15,8 @@ class InviteGroupsController < ApplicationController
 
   def submit
     @invite_group.assign_attributes(invite_group_params)
+    # Opting out clears any address typed before the box was unchecked.
+    @invite_group.email = nil unless @invite_group.email_opt_in
     if @invite_group.save(context: :rsvp)
       redirect_to invite_group_path(@invite_group), notice: "Thank you! Your RSVP has been saved."
     else
@@ -48,6 +50,8 @@ class InviteGroupsController < ApplicationController
   def invite_group_params
     params.require(:invite_group).permit(
       :weecasa_response,
+      :email_opt_in,
+      :email,
       guests_attributes: [
         :id, :attending, :dietary_notes, :plus_one,
         :plus_one_first_name, :plus_one_last_name,
