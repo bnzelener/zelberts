@@ -5,7 +5,7 @@ class Admin::GuestsController < Admin::BaseController
     @view = params[:view] == "groups" ? "groups" : "guests"
     @query = params[:q].to_s.strip
 
-    @guests = Guest.includes(:invite_group).order(created_at: :desc)
+    @guests = Guest.includes(:invite_group, :plus_one_guest, :plus_one_host).order(created_at: :desc)
     @guests = @guests.merge(Guest.search(@query)) if @query.present?
 
     if @view == "groups"
@@ -46,7 +46,8 @@ class Admin::GuestsController < Admin::BaseController
 
   def guest_params
     params.require(:guest).permit(
-      :first_name, :last_name, :phone, :dietary_notes, :plus_one_allowed, :invite_group_id
+      :first_name, :last_name, :phone, :dietary_notes, :plus_one_allowed, :invite_group_id,
+      :attending, :plus_one, :plus_one_first_name, :plus_one_last_name
     )
   end
 end

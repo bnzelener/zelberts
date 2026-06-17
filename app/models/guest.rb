@@ -130,14 +130,10 @@ class Guest < ApplicationRecord
   def clear_declined_followups
     unless attending == true
       self.plus_one = false
-      self.plus_one_name = nil
       event_responses.each { |er| er.attending = false }
     end
 
-    unless plus_one_allowed
-      self.plus_one = false
-      self.plus_one_name = nil
-    end
+    self.plus_one = false unless plus_one_allowed
   end
 
   def set_responded_at

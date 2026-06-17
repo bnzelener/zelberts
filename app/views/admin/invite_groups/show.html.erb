@@ -14,7 +14,14 @@
 <div class="bg-white border border-gray-200 rounded p-6 mb-6 space-y-2 text-sm">
   <p><span class="text-gray-500">Email:</span> <%= @invite_group.email.presence || "—" %></p>
   <p><span class="text-gray-500">Address:</span> <%= @invite_group.address.presence || "—" %></p>
-  <p><span class="text-gray-500">Members:</span> <%= @invite_group.guests.map(&:full_name).join(", ").presence || "—" %></p>
+  <p>
+    <span class="text-gray-500">Members:</span>
+    <% if @invite_group.guests.any? %>
+      <%= safe_join(@invite_group.guests.map { |g| link_to(g.full_name, edit_admin_guest_path(g), class: "text-gray-800 hover:underline") }, ", ") %>
+    <% else %>
+      —
+    <% end %>
+  </p>
 </div>
 
 <%# WeeCasa tiny homes %>
@@ -25,23 +32,20 @@
     whether they'd like to stay in the tiny homes.
   </p>
 
-  <%= form_with model: @invite_group, url: admin_invite_group_path(@invite_group), method: :patch, class: "flex items-center gap-4" do |f| %>
+  <%= form_with model: @invite_group, url: admin_invite_group_path(@invite_group), method: :patch, class: "space-y-4" do |f| %>
     <label class="flex items-center gap-2 text-sm text-gray-800">
       <%= f.check_box :weecasa_included, class: "w-4 h-4" %>
       Include this group in the WeeCasa tiny home block
     </label>
+
+    <div>
+      <%= f.label :weecasa_response, "Group's response", class: "block text-sm font-medium text-gray-700 mb-1" %>
+      <%= f.select :weecasa_response,
+          [ [ "Yes — would like to stay in the tiny homes", true ], [ "No, thank you", false ] ],
+          { include_blank: "No response yet" },
+          class: "w-full max-w-md border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400" %>
+    </div>
+
     <%= f.submit "Save", class: "bg-gray-900 text-white px-4 py-2 text-xs uppercase tracking-wider rounded hover:bg-gray-700 cursor-pointer" %>
   <% end %>
-
-  <p class="text-sm text-gray-500 mt-5">
-    <span class="font-medium text-gray-700">Group's response:</span>
-    <% case @invite_group.weecasa_response %>
-    <% when true %>
-      <span class="text-green-700">Yes — would like to stay in the tiny homes</span>
-    <% when false %>
-      <span class="text-gray-700">No, thank you</span>
-    <% else %>
-      <span class="text-amber-600">No response yet</span>
-    <% end %>
-  </p>
 </div>

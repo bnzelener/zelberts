@@ -1,3 +1,13 @@
+<nav class="text-sm text-gray-500 mb-4">
+  <%= link_to "Guests", admin_guests_path, class: "hover:underline" %>
+  <% if @guest.invite_group %>
+    <span class="mx-1.5">/</span>
+    <%= link_to @guest.invite_group.name, admin_invite_group_path(@guest.invite_group), class: "hover:underline" %>
+  <% end %>
+  <span class="mx-1.5">/</span>
+  <span class="text-gray-700"><%= @guest.full_name %></span>
+</nav>
+
 <div class="flex items-center justify-between mb-8">
   <h1 class="text-2xl font-semibold">Edit guest</h1>
   <%= link_to "Back", admin_guests_path, class: "text-sm text-gray-600 hover:underline" %>
@@ -47,6 +57,35 @@
     <%= f.check_box :plus_one_allowed, class: "w-4 h-4" %>
     <span class="text-sm font-medium">Allow this guest to bring a plus-one</span>
   </label>
+
+  <div class="border-t border-gray-100 pt-5 space-y-4">
+    <h2 class="text-sm font-semibold text-gray-700">RSVP responses</h2>
+
+    <div>
+      <%= f.label :attending, "Attending", class: "block text-sm font-medium mb-1" %>
+      <%= f.select :attending,
+          [ [ "Will attend", true ], [ "Won't attend", false ] ],
+          { include_blank: "No response" },
+          class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400" %>
+    </div>
+
+    <label class="flex items-center gap-3">
+      <%= f.check_box :plus_one, class: "w-4 h-4" %>
+      <span class="text-sm font-medium">Bringing a plus-one</span>
+    </label>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div>
+        <%= f.label :plus_one_first_name, "Plus-one first name", class: "block text-sm font-medium mb-1" %>
+        <%= f.text_field :plus_one_first_name, class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400" %>
+      </div>
+      <div>
+        <%= f.label :plus_one_last_name, "Plus-one last name", class: "block text-sm font-medium mb-1" %>
+        <%= f.text_field :plus_one_last_name, class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400" %>
+      </div>
+    </div>
+    <p class="text-xs text-gray-500">A plus-one is only saved when the guest is attending and allowed a plus-one. It becomes its own guest in this invite group.</p>
+  </div>
 
   <div class="flex items-center gap-3 pt-2">
     <%= f.submit "Save guest", class: "bg-gray-900 text-white text-sm px-4 py-2 rounded hover:bg-gray-700 cursor-pointer" %>

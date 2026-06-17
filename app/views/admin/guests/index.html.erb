@@ -141,8 +141,10 @@
               </td>
               <td class="py-4 pr-4 text-nasturtium-sage text-sm"><%= guest.dietary_notes.presence || "—" %></td>
               <td class="py-4 pr-4 text-nasturtium-sage text-sm">
-                <% if guest.plus_one? && guest.plus_one_name.present? %>
-                  <%= guest.plus_one_name %>
+                <% if guest.plus_one_guest.present? %>
+                  <%= guest.plus_one_guest.full_name %>
+                <% elsif guest.plus_one_host.present? %>
+                  <span class="text-nasturtium-sage/60">+1 of <%= guest.plus_one_host.full_name %></span>
                 <% elsif guest.plus_one_allowed? %>
                   <span class="text-nasturtium-olive">Allowed</span>
                 <% else %>

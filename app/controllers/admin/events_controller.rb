@@ -9,7 +9,7 @@ class Admin::EventsController < Admin::BaseController
   def show
     @attending_guests = Guest.joins(:event_responses)
                              .where(event_responses: { event_id: @event.id, attending: true })
-                             .includes(:invite_group)
+                             .includes(:invite_group, :plus_one_guest)
                              .order(:last_name, :first_name)
   end
 

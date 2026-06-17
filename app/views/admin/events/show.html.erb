@@ -31,7 +31,7 @@
           <tr>
             <td class="px-4 py-3 font-medium"><%= guest.full_name %></td>
             <td class="px-4 py-3 text-gray-600"><%= guest.invite_group&.name || "—" %></td>
-            <td class="px-4 py-3 text-gray-600"><%= guest.plus_one? ? (guest.plus_one_name.presence || "Yes") : "—" %></td>
+            <td class="px-4 py-3 text-gray-600"><%= guest.plus_one_guest&.full_name || "—" %></td>
           </tr>
         <% end %>
       </tbody>
