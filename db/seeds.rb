@@ -4,7 +4,7 @@ Event.destroy_all
 Event.create!(
   name: "Welcome Drinks",
   date: Date.new(2026, 9, 11),
-  time: "5:00 PM",
+  time: "7:30 PM",
   location: "OAK at Fourteenth",
   address: "1400 Pearl St, Boulder, CO 80302",
   description: "Join us the evening before for a casual gathering to kick off the weekend.",
