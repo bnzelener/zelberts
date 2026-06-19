@@ -27,27 +27,48 @@
   <body class="min-h-screen flex flex-col bg-nasturtium-cream text-nasturtium-forest-dark">
     <%# ── Navigation ── %>
     <header class="border-b border-nasturtium-linen">
-      <nav class="max-w-5xl mx-auto px-6 py-5">
-        <div class="flex flex-col items-center space-y-4">
-          <%= link_to root_path, class: "no-underline" do %>
-            <h1 class="font-script text-3xl leading-none text-nasturtium-magenta hover:text-nasturtium-forest transition-colors">
-              A & B
-            </h1>
-          <% end %>
+      <nav class="max-w-5xl mx-auto px-6 py-5" data-controller="mobile-nav">
+        <div class="flex flex-col items-center md:space-y-4">
+          <div class="w-full flex items-center justify-between md:justify-center">
+            <%= link_to root_path, class: "no-underline" do %>
+              <h1 class="font-script text-3xl leading-none text-nasturtium-magenta hover:text-nasturtium-forest transition-colors">
+                A & B
+              </h1>
+            <% end %>
 
-          <div class="flex items-center space-x-8 text-sm tracking-widest uppercase">
+            <%# Hamburger toggle — only shown on mobile %>
+            <button type="button"
+                    class="md:hidden text-nasturtium-sage hover:text-nasturtium-forest transition-colors p-2 -mr-2"
+                    aria-label="Toggle navigation menu"
+                    aria-expanded="false"
+                    data-mobile-nav-target="button"
+                    data-action="mobile-nav#toggle">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5" />
+              </svg>
+            </button>
+          </div>
+
+          <div class="hidden md:flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-8 pt-4 md:pt-0 text-sm tracking-widest uppercase"
+               data-mobile-nav-target="menu">
             <%= link_to "Home", root_path,
-                class: "text-nasturtium-sage hover:text-nasturtium-forest transition-colors" %>
+                class: "text-nasturtium-sage hover:text-nasturtium-forest transition-colors",
+                data: { action: "mobile-nav#close" } %>
             <%= link_to "Details", events_path,
-                class: "text-nasturtium-sage hover:text-nasturtium-forest transition-colors" %>
+                class: "text-nasturtium-sage hover:text-nasturtium-forest transition-colors",
+                data: { action: "mobile-nav#close" } %>
             <%= link_to "Travel", travel_path,
-                class: "text-nasturtium-sage hover:text-nasturtium-forest transition-colors" %>
+                class: "text-nasturtium-sage hover:text-nasturtium-forest transition-colors",
+                data: { action: "mobile-nav#close" } %>
             <%= link_to "Recommendations", recommendations_path,
-                class: "text-nasturtium-sage hover:text-nasturtium-forest transition-colors" %>
+                class: "text-nasturtium-sage hover:text-nasturtium-forest transition-colors",
+                data: { action: "mobile-nav#close" } %>
             <%= link_to "Registry", registry_path,
-                class: "text-nasturtium-sage hover:text-nasturtium-forest transition-colors" %>
+                class: "text-nasturtium-sage hover:text-nasturtium-forest transition-colors",
+                data: { action: "mobile-nav#close" } %>
             <%= link_to "RSVP", rsvp_path,
-                class: "text-nasturtium-sage hover:text-nasturtium-forest transition-colors" %>
+                class: "text-nasturtium-sage hover:text-nasturtium-forest transition-colors",
+                data: { action: "mobile-nav#close" } %>
           </div>
         </div>
       </nav>
