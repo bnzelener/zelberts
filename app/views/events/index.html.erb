@@ -41,7 +41,8 @@
       <% if saturday_date %>
         <%# ── Our big day (Saturday) ── %>
         <p class="font-script text-3xl md:text-4xl text-nasturtium-magenta text-center mb-2">Our big day</p>
-        <p class="font-serif font-light text-2xl text-nasturtium-forest-dark text-center mb-8"><%= "#{saturday_date.strftime('%A %B')} #{saturday_date.day.ordinalize}" %></p>
+        <p class="font-serif font-light text-2xl text-nasturtium-forest-dark text-center mb-1"><%= saturday_date.strftime("%A") %></p>
+        <p class="text-xs tracking-[0.3em] uppercase text-nasturtium-forest-dark text-center mb-8"><%= "#{saturday_date.strftime('%B')} #{saturday_date.day.ordinalize}" %></p>
 
         <%#
           On mobile this stacks in source order: first event (Ceremony + Reception),
