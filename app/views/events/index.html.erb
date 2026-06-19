@@ -19,7 +19,7 @@
       <%# Days leading up to the wedding (e.g. Friday) — above "Our big day" %>
       <% before_days.each do |date, events_on_day| %>
         <div class="text-center">
-          <p class="font-serif font-light text-xl text-nasturtium-forest-dark mb-1"><%= date.strftime("%A") %></p>
+          <p class="font-serif font-light text-2xl text-nasturtium-forest-dark mb-1"><%= date.strftime("%A") %></p>
           <p class="text-xs tracking-[0.3em] uppercase text-nasturtium-forest-dark mb-4"><%= "#{date.strftime('%B')} #{date.day.ordinalize}" %></p>
           <div class="space-y-6">
             <% events_on_day.each do |event| %>
@@ -41,7 +41,7 @@
       <% if saturday_date %>
         <%# ── Our big day (Saturday) ── %>
         <p class="font-script text-3xl md:text-4xl text-nasturtium-magenta text-center mb-2">Our big day</p>
-        <p class="font-serif font-light text-xl md:text-2xl text-nasturtium-forest-dark text-center mb-8"><%= "#{saturday_date.strftime('%A %B')} #{saturday_date.day.ordinalize}" %></p>
+        <p class="font-serif font-light text-2xl text-nasturtium-forest-dark text-center mb-8"><%= "#{saturday_date.strftime('%A %B')} #{saturday_date.day.ordinalize}" %></p>
 
         <%#
           On mobile this stacks in source order: first event (Ceremony + Reception),
@@ -97,7 +97,7 @@
       <% after_days.each do |date, events_on_day| %>
         <%= image_tag "flower-divider.png", alt: "", class: "h-8 w-auto mx-auto my-8" %>
         <div class="text-center">
-          <p class="font-serif font-light text-xl text-nasturtium-forest-dark mb-1"><%= date.strftime("%A") %></p>
+          <p class="font-serif font-light text-2xl text-nasturtium-forest-dark mb-1"><%= date.strftime("%A") %></p>
           <p class="text-xs tracking-[0.3em] uppercase text-nasturtium-forest-dark mb-4"><%= "#{date.strftime('%B')} #{date.day.ordinalize}" %></p>
           <div class="space-y-6">
             <% events_on_day.each do |event| %>
