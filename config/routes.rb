@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 
   # Static pages
   get "travel", to: "travel#index", as: :travel
+  get "registry", to: "registry#index", as: :registry
 
   # Tiny homes — intentionally not linked from public nav; shared directly with guests
   get "weecasa", to: "pages#weecasa", as: :weecasa

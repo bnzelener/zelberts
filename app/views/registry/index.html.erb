@@ -1,45 +1,32 @@
-<section class="max-w-3xl mx-auto px-6 py-20">
-  <div class="text-center mb-16">
+<%# ── Header image ── %>
+<figure class="m-0">
+  <%= image_tag "ali_blackstone.jpg",
+        alt: "Ali above Blackstone Bay in Whittier, Alaska",
+        class: "w-full h-64 md:h-96 object-cover" %>
+  <figcaption class="text-center text-xs tracking-[0.2em] uppercase text-nasturtium-sage py-3 px-6">
+    Ali above Blackstone Bay in Whittier, Alaska
+  </figcaption>
+</figure>
+
+<section class="max-w-3xl mx-auto px-6 pb-20 pt-8">
+  <div class="text-center mb-12">
     <h1 class="font-serif font-light text-5xl text-nasturtium-forest mb-2">Registry</h1>
-    <div class="w-12 h-px bg-nasturtium-olive mx-auto mt-4 mb-8"></div>
-    <p class="text-nasturtium-sage text-lg max-w-xl mx-auto">
-      Your presence is the greatest gift. For those who wish to honor us with
-      something more, we've registered at the following places.
+    <%= image_tag "flower-divider.png", alt: "", class: "h-8 w-auto mx-auto mt-2 mb-8" %>
+    <p class="text-nasturtium-forest-dark text-lg leading-relaxed max-w-xl mx-auto">
+      Your presence is more than enough of a present to us! Please do not feel
+      compelled to give us anything. For the stubborn of you we&rsquo;ve put
+      together a honeymoon fund to support a future trip to Cortina d&rsquo;Ampezzo
+      &mdash; the epicenter of the Dolomites in Italy &mdash; for hiking and fresh
+      pasta!
     </p>
   </div>
 
-  <div class="grid md:grid-cols-2 gap-8">
-    <%# Registry Link Cards — update href with your actual registry URLs %>
-    <a href="#"
-       class="block p-10 text-center border border-nasturtium-linen rounded hover:border-nasturtium-olive/50 hover:bg-nasturtium-olive/5 transition-all group">
-      <p class="font-serif text-2xl text-nasturtium-forest group-hover:text-nasturtium-forest-light transition-colors mb-2">
-        Zola
-      </p>
-      <p class="text-nasturtium-sage text-sm">View Registry</p>
-    </a>
-
-    <a href="#"
-       class="block p-10 text-center border border-nasturtium-linen rounded hover:border-nasturtium-olive/50 hover:bg-nasturtium-olive/5 transition-all group">
-      <p class="font-serif text-2xl text-nasturtium-forest group-hover:text-nasturtium-forest-light transition-colors mb-2">
-        Crate & Barrel
-      </p>
-      <p class="text-nasturtium-sage text-sm">View Registry</p>
-    </a>
-
-    <a href="#"
-       class="block p-10 text-center border border-nasturtium-linen rounded hover:border-nasturtium-olive/50 hover:bg-nasturtium-olive/5 transition-all group">
-      <p class="font-serif text-2xl text-nasturtium-forest group-hover:text-nasturtium-forest-light transition-colors mb-2">
-        Williams Sonoma
-      </p>
-      <p class="text-nasturtium-sage text-sm">View Registry</p>
-    </a>
-
-    <a href="#"
-       class="block p-10 text-center border border-nasturtium-linen rounded hover:border-nasturtium-olive/50 hover:bg-nasturtium-olive/5 transition-all group">
-      <p class="font-serif text-2xl text-nasturtium-forest group-hover:text-nasturtium-forest-light transition-colors mb-2">
-        Honeymoon Fund
-      </p>
-      <p class="text-nasturtium-sage text-sm">Contribute</p>
+  <div class="text-center">
+    <a href="https://www.honeyfund.com/site/zelener-colbert-09-12-2026"
+       target="_blank"
+       rel="noopener noreferrer"
+       class="inline-block bg-nasturtium-forest text-nasturtium-cream px-8 py-3 text-sm tracking-[0.2em] uppercase hover:bg-nasturtium-forest-light transition-colors">
+      Honeymoon Fund
     </a>
   </div>
 </section>
