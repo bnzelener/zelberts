@@ -16,6 +16,18 @@ anytime before August 10th.
 <% end -%>
 <% end -%>
 <% end -%>
+<% if @invite_group.weecasa_included? -%>
+
+WeeCasa Tiny Homes
+<% case @invite_group.weecasa_response -%>
+<% when true -%>
+Yes — you'd like to stay in the tiny homes with us on Friday & Saturday.
+<% when false -%>
+No thank you — you won't be staying at WeeCasa.
+<% else -%>
+No response yet.
+<% end -%>
+<% end -%>
 
 Update your RSVP: <%= form_invite_group_url(@invite_group) %>
 

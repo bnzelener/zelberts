@@ -52,6 +52,28 @@
   <% end %>
 </table>
 
+<% if @invite_group.weecasa_included? %>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 24px 0;">
+    <tr>
+      <td style="padding:16px 18px; background-color:#f7f4ed; border:1px solid #e6e2d6; border-radius:6px;">
+        <p style="margin:0 0 6px 0; font-family:Georgia,'Times New Roman',serif; font-size:12px; letter-spacing:2px; text-transform:uppercase; color:#7a8a7e;">
+          WeeCasa Tiny Homes
+        </p>
+        <p style="margin:0; font-size:15px; color:#33423a;">
+          <% case @invite_group.weecasa_response %>
+          <% when true %>
+            Yes — you'd like to stay in the tiny homes with us on Friday &amp; Saturday.
+          <% when false %>
+            No thank you — you won't be staying at WeeCasa.
+          <% else %>
+            <span style="color:#c4c726;">No response yet.</span>
+          <% end %>
+        </p>
+      </td>
+    </tr>
+  </table>
+<% end %>
+
 <!-- Button -->
 <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:8px auto 8px auto;">
   <tr>
