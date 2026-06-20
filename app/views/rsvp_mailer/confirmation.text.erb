@@ -1,0 +1,23 @@
+Thank you, <%= @invite_group.name %>!
+
+We've saved your RSVP. Here's what we have on file — you can update it
+anytime before August 10th.
+
+<% @guests.each do |guest| -%>
+<% status = guest.attending ? "Attending" : (guest.attending == false ? "Not attending" : "No response") -%>
+- <%= guest.full_name %>: <%= status %>
+<% if guest.attending -%>
+<% attending_events = guest.event_responses.select(&:attending).map { |er| @events.find { |e| e.id == er.event_id }&.name }.compact -%>
+<% if attending_events.any? -%>
+    Events: <%= attending_events.join(", ") %>
+<% end -%>
+<% if guest.plus_one_guest.present? -%>
+    Plus one: <%= guest.plus_one_guest.full_name %>
+<% end -%>
+<% end -%>
+<% end -%>
+
+Update your RSVP: <%= form_invite_group_url(@invite_group) %>
+
+We can't wait to celebrate with you.
+— Ali & Brennan

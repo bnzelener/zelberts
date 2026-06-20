@@ -53,6 +53,10 @@ group :development do
 end
 
 group :test do
+  # Pinned to 5.x: minitest 6 breaks Rails 7.2's test runner (line_filtering
+  # passes a different arity to Minitest::Test#run).
+  gem "minitest", "~> 5.25"
+
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"

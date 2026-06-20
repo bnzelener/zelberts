@@ -1,13 +1,65 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <style>
-      /* Email styles need to be inline */
-    </style>
+    <meta name="color-scheme" content="light">
+    <title><%= content_for(:subject) || "Ali & Brennan" %></title>
   </head>
+  <%#
+    Shared shell for every email this app sends. Email clients ignore <style>
+    blocks and web fonts, so everything is inline and fonts fall back to a
+    web-safe serif. New emails (confirmation, reminders) just yield into this.
+    Brand palette: cream #f7f4ed, forest-dark #1f4d1b, forest #3a8d36,
+    olive #9fb525, sage #2f7a2c, red #ff1400, golden #c4c726.
+  %>
+  <body style="margin:0; padding:0; background-color:#f7f4ed; -webkit-text-size-adjust:100%;">
+    <!-- Preheader: shown as the inbox preview, hidden in the body. -->
+    <div style="display:none; max-height:0; overflow:hidden; opacity:0; font-size:1px; line-height:1px; color:#f7f4ed;">
+      <%= content_for(:preheader) || "Ali & Brennan · September 12, 2026 · Lyons, Colorado" %>
+    </div>
 
-  <body>
-    <%= yield %>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f7f4ed;">
+      <tr>
+        <td align="center" style="padding:32px 16px;">
+          <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px; max-width:600px; background-color:#ffffff; border-radius:8px; overflow:hidden; border:1px solid #f0ede4;">
+
+            <!-- Header -->
+            <tr>
+              <td align="center" style="background-color:#1f4d1b; padding:40px 32px;">
+                <h1 style="margin:0; font-family:Georgia,'Times New Roman',serif; font-weight:normal; font-size:34px; line-height:1.1; color:#f7f4ed; letter-spacing:1px;">
+                  Ali &amp; Brennan
+                </h1>
+                <div style="width:48px; height:2px; background-color:#9fb525; margin:18px auto;"></div>
+                <p style="margin:0; font-family:Georgia,'Times New Roman',serif; font-size:14px; letter-spacing:2px; text-transform:uppercase; color:#c4c726;">
+                  September 12, 2026 &middot; Lyons, Colorado
+                </p>
+              </td>
+            </tr>
+
+            <!-- Body -->
+            <tr>
+              <td style="padding:36px 36px 28px 36px; font-family:Georgia,'Times New Roman',serif; font-size:16px; line-height:1.6; color:#33423a;">
+                <%= yield %>
+              </td>
+            </tr>
+
+            <!-- Footer -->
+            <tr>
+              <td align="center" style="padding:24px 32px 32px 32px; border-top:1px solid #f0ede4;">
+                <p style="margin:0 0 6px 0; font-family:Georgia,'Times New Roman',serif; font-size:13px; line-height:1.5; color:#7a8a7e;">
+                  <a href="<%= root_url %>" style="color:#3a8d36; text-decoration:none;">aliandbrennan.com</a>
+                </p>
+                <p style="margin:0; font-family:Georgia,'Times New Roman',serif; font-size:12px; line-height:1.5; color:#9aa89d;">
+                  You're receiving this because you RSVP'd and asked for wedding updates.
+                </p>
+              </td>
+            </tr>
+
+          </table>
+        </td>
+      </tr>
+    </table>
   </body>
 </html>

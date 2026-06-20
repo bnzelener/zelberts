@@ -18,6 +18,11 @@ class InviteGroupsController < ApplicationController
     # Opting out clears any address typed before the box was unchecked.
     @invite_group.email = nil unless @invite_group.email_opt_in
     if @invite_group.save(context: :rsvp)
+      # Only opt-in parties have an email on file (it's nilled above otherwise).
+      # Enqueued so a mail hiccup never delays or breaks the RSVP save.
+      if @invite_group.email.present?
+        RsvpMailer.confirmation(@invite_group).deliver_later
+      end
       redirect_to invite_group_path(@invite_group), notice: "Thank you! Your RSVP has been saved."
     else
       @events = Event.all
