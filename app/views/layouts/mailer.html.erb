@@ -6,6 +6,17 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="color-scheme" content="light">
     <title><%= content_for(:subject) || "Ali & Brennan" %></title>
+    <style>
+      /* Self-hosted brand heading font. Honored by clients that support
+         @font-face (e.g. Apple Mail); Gmail/Outlook strip it and fall back to
+         the Georgia serif stack declared inline on each element. */
+      @font-face {
+        font-family: 'TAN Meringue';
+        src: url('https://zelberts.com/fonts/TANMeringue.otf') format('opentype');
+        font-weight: normal;
+        font-style: normal;
+      }
+    </style>
   </head>
   <%#
     Shared shell for every email this app sends. Email clients ignore <style>
@@ -28,7 +39,7 @@
             <!-- Header -->
             <tr>
               <td align="center" style="background-color:#1f4d1b; padding:40px 32px;">
-                <h1 style="margin:0; font-family:Georgia,'Times New Roman',serif; font-weight:normal; font-size:34px; line-height:1.1; color:#f7f4ed; letter-spacing:1px;">
+                <h1 style="margin:0; font-family:'TAN Meringue',Georgia,'Times New Roman',serif; font-weight:normal; font-size:36px; line-height:1.1; color:#f7f4ed; letter-spacing:1px;">
                   Ali &amp; Brennan
                 </h1>
                 <div style="width:48px; height:2px; background-color:#9fb525; margin:18px auto;"></div>
@@ -49,7 +60,7 @@
             <tr>
               <td align="center" style="padding:24px 32px 32px 32px; border-top:1px solid #f0ede4;">
                 <p style="margin:0 0 6px 0; font-family:Georgia,'Times New Roman',serif; font-size:13px; line-height:1.5; color:#7a8a7e;">
-                  <a href="<%= root_url %>" style="color:#3a8d36; text-decoration:none;">aliandbrennan.com</a>
+                  <a href="<%= root_url %>" style="color:#3a8d36; text-decoration:none;">zelberts.com</a>
                 </p>
                 <p style="margin:0; font-family:Georgia,'Times New Roman',serif; font-size:12px; line-height:1.5; color:#9aa89d;">
                   You're receiving this because you RSVP'd and asked for wedding updates.
