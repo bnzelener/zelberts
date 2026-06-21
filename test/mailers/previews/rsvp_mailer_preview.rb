@@ -5,4 +5,9 @@ class RsvpMailerPreview < ActionMailer::Preview
     group = InviteGroup.where.not(email: nil).first || InviteGroup.first
     RsvpMailer.confirmation(group)
   end
+
+  def host_notification
+    group = InviteGroup.where.not(email: nil).first || InviteGroup.first
+    RsvpMailer.host_notification(group)
+  end
 end

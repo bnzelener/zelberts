@@ -27,16 +27,18 @@ class InviteGroupsControllerTest < ActionDispatch::IntegrationTest
     }
   end
 
-  test "submitting with an email enqueues one confirmation email" do
-    assert_enqueued_emails 1 do
+  test "submitting with an email enqueues a confirmation and a host notification" do
+    assert_enqueued_emails 2 do
       patch form_invite_group_path(@group), params: submit_params(email_opt_in: "1", email: "smiths@example.com")
     end
     assert_redirected_to invite_group_path(@group)
   end
 
-  test "submitting without opting into email enqueues no email" do
-    assert_no_enqueued_emails do
-      patch form_invite_group_path(@group), params: submit_params(email_opt_in: "0", email: "")
+  test "submitting without opting into email still notifies the host" do
+    assert_enqueued_email_with RsvpMailer, :host_notification, args: [ @group ] do
+      assert_enqueued_emails 1 do
+        patch form_invite_group_path(@group), params: submit_params(email_opt_in: "0", email: "")
+      end
     end
     assert_redirected_to invite_group_path(@group)
   end

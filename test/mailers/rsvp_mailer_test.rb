@@ -23,4 +23,20 @@ class RsvpMailerTest < ActionMailer::TestCase
       assert_match "Welcome Dinner", part.body.to_s
     end
   end
+
+  test "host notification goes to the couple regardless of opt-in" do
+    mail = RsvpMailer.host_notification(@group)
+
+    assert_equal [ "thezelberts@gmail.com" ], mail.to
+    assert_match "The Smiths", mail.subject
+  end
+
+  test "host notification body summarizes the guest and their events" do
+    mail = RsvpMailer.host_notification(@group)
+
+    [ mail.html_part, mail.text_part ].each do |part|
+      assert_match "Dana Smith", part.body.to_s
+      assert_match "Welcome Dinner", part.body.to_s
+    end
+  end
 end

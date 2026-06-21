@@ -1,0 +1,33 @@
+RSVP from <%= @invite_group.name %>
+
+This party just submitted or updated their RSVP. Here's what's now on file.
+
+<% @guests.each do |guest| -%>
+<% status = guest.attending ? "Attending" : (guest.attending == false ? "Not attending" : "No response") -%>
+- <%= guest.full_name %>: <%= status %>
+<% if guest.attending -%>
+<% attending_events = guest.event_responses.select(&:attending).map { |er| @events.find { |e| e.id == er.event_id }&.name }.compact -%>
+<% if attending_events.any? -%>
+    Events: <%= attending_events.join(", ") %>
+<% end -%>
+<% if guest.plus_one_guest.present? -%>
+    Plus one: <%= guest.plus_one_guest.full_name %>
+<% end -%>
+<% end -%>
+<% end -%>
+<% if @invite_group.weecasa_included? -%>
+
+WeeCasa Tiny Homes
+<% case @invite_group.weecasa_response -%>
+<% when true -%>
+Yes — they'd like to stay in the tiny homes on Friday & Saturday.
+<% when false -%>
+No thank you — they won't be staying at WeeCasa.
+<% else -%>
+No response yet.
+<% end -%>
+<% end -%>
+
+Contact email: <%= @invite_group.email.presence || "opted out of updates" %>
+
+View this RSVP: <%= invite_group_url(@invite_group) %>

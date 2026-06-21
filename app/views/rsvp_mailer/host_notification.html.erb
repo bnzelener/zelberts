@@ -1,0 +1,95 @@
+<% content_for :preheader, "#{@invite_group.name} just submitted or updated their RSVP." %>
+
+<h2 style="margin:0 0 16px 0; font-family:'TAN Meringue',Georgia,'Times New Roman',serif; font-weight:normal; font-size:26px; color:#1f4d1b;">
+  RSVP from <%= @invite_group.name %>
+</h2>
+
+<p style="margin:0 0 24px 0;">
+  This party just submitted or updated their RSVP. Here's what's now on file.
+</p>
+
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 24px 0;">
+  <% @guests.each do |guest| %>
+    <tr>
+      <td style="padding:14px 0; border-bottom:1px solid #f0ede4;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td style="font-family:Georgia,'Times New Roman',serif; font-size:17px; color:#1f4d1b;">
+              <%= guest.full_name %>
+            </td>
+            <td align="right" style="font-family:Georgia,'Times New Roman',serif; font-size:13px;">
+              <% if guest.attending %>
+                <span style="color:#2f7a2c;">Attending</span>
+              <% elsif guest.attending == false %>
+                <span style="color:#ff1400;">Not attending</span>
+              <% else %>
+                <span style="color:#c4c726;">No response</span>
+              <% end %>
+            </td>
+          </tr>
+        </table>
+
+        <% if guest.attending %>
+          <% attending_events = guest.event_responses.select(&:attending).map { |er| @events.find { |e| e.id == er.event_id }&.name }.compact %>
+          <% if attending_events.any? %>
+            <p style="margin:6px 0 0 0; font-size:14px; color:#5a6b5e;">
+              Events: <%= attending_events.join(", ") %>
+            </p>
+          <% else %>
+            <p style="margin:6px 0 0 0; font-size:14px; color:#9aa89d;">
+              No events selected yet.
+            </p>
+          <% end %>
+          <% if guest.plus_one_guest.present? %>
+            <p style="margin:4px 0 0 0; font-size:14px; color:#5a6b5e;">
+              Plus one: <%= guest.plus_one_guest.full_name %>
+            </p>
+          <% end %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<% if @invite_group.weecasa_included? %>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0 0 24px 0;">
+    <tr>
+      <td style="padding:16px 18px; background-color:#f7f4ed; border:1px solid #e6e2d6; border-radius:6px;">
+        <p style="margin:0 0 6px 0; font-family:Georgia,'Times New Roman',serif; font-size:12px; letter-spacing:2px; text-transform:uppercase; color:#7a8a7e;">
+          WeeCasa Tiny Homes
+        </p>
+        <p style="margin:0; font-size:15px; color:#33423a;">
+          <% case @invite_group.weecasa_response %>
+          <% when true %>
+            Yes — they'd like to stay in the tiny homes on Friday &amp; Saturday.
+          <% when false %>
+            No thank you — they won't be staying at WeeCasa.
+          <% else %>
+            <span style="color:#c4c726;">No response yet.</span>
+          <% end %>
+        </p>
+      </td>
+    </tr>
+  </table>
+<% end %>
+
+<p style="margin:0 0 24px 0; font-size:15px; color:#5a6b5e;">
+  Contact email:
+  <% if @invite_group.email.present? %>
+    <%= @invite_group.email %>
+  <% else %>
+    <span style="color:#9aa89d;">opted out of updates</span>
+  <% end %>
+</p>
+
+<!-- Button -->
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin:8px auto 8px auto;">
+  <tr>
+    <td align="center" bgcolor="#C4C726" style="border-radius:6px;">
+      <a href="<%= invite_group_url(@invite_group) %>"
+         style="display:inline-block; padding:13px 32px; font-family:'TAN Meringue',Georgia,'Times New Roman',serif; font-size:18px; color:#1f4d1b; text-decoration:none; border-radius:6px;">
+        View this RSVP
+      </a>
+    </td>
+  </tr>
+</table>
