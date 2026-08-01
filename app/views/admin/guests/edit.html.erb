@@ -69,6 +69,22 @@
           class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400" %>
     </div>
 
+    <% if @guest.event_responses.any? %>
+      <div>
+        <span class="block text-sm font-medium mb-1">Events attending</span>
+        <div class="space-y-2">
+          <%= f.fields_for :event_responses, @guest.event_responses.sort_by { |er| er.event.sort_order || 0 } do |ef| %>
+            <label class="flex items-center gap-3">
+              <%= ef.hidden_field :event_id %>
+              <%= ef.check_box :attending, class: "w-4 h-4" %>
+              <span class="text-sm"><%= ef.object.event.name %></span>
+            </label>
+          <% end %>
+        </div>
+        <p class="text-xs text-gray-500 mt-2">Which calendar events this guest is joining. Cleared automatically if the guest isn't attending.</p>
+      </div>
+    <% end %>
+
     <label class="flex items-center gap-3">
       <%= f.check_box :plus_one, class: "w-4 h-4" %>
       <span class="text-sm font-medium">Bringing a plus-one</span>

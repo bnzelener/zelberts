@@ -39,12 +39,14 @@ class Admin::GuestsController < Admin::BaseController
   end
 
   def edit
+    build_missing_event_responses
   end
 
   def update
     if @guest.update(guest_params)
       redirect_to admin_guests_path, notice: "Guest updated."
     else
+      build_missing_event_responses
       render :edit, status: :unprocessable_entity
     end
   end
@@ -55,10 +57,22 @@ class Admin::GuestsController < Admin::BaseController
     @guest = Guest.find(params[:id])
   end
 
+  # Ensure the guest has an in-memory EventResponse for every event so the edit
+  # form renders a checkbox per event. Persisted responses keep their id
+  # (→ UPDATE); newly built ones have no id (→ INSERT on save).
+  def build_missing_event_responses
+    existing_event_ids = @guest.event_responses.map(&:event_id)
+    Event.all.each do |event|
+      next if existing_event_ids.include?(event.id)
+      @guest.event_responses.build(event: event, attending: false)
+    end
+  end
+
   def guest_params
     params.require(:guest).permit(
       :first_name, :last_name, :phone, :dietary_notes, :plus_one_allowed, :invite_group_id,
-      :attending, :plus_one, :plus_one_first_name, :plus_one_last_name
+      :attending, :plus_one, :plus_one_first_name, :plus_one_last_name,
+      event_responses_attributes: [ :id, :event_id, :attending ]
     )
   end
 end
