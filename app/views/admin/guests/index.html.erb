@@ -36,12 +36,22 @@
     <p class="text-nasturtium-sage text-sm mb-4">Showing results for &ldquo;<%= @query %>&rdquo;.</p>
   <% end %>
 
-  <%# View toggle %>
-  <div class="inline-flex rounded border border-nasturtium-forest/20 overflow-hidden mb-6">
-    <%= link_to "By guest", admin_guests_path(view: "guests", q: @query.presence),
-          class: "px-4 py-2 text-xs tracking-[0.2em] uppercase #{@view == "guests" ? "bg-nasturtium-forest text-nasturtium-linen" : "text-nasturtium-sage hover:bg-nasturtium-olive/10"}" %>
-    <%= link_to "By group", admin_guests_path(view: "groups", q: @query.presence),
-          class: "px-4 py-2 text-xs tracking-[0.2em] uppercase #{@view == "groups" ? "bg-nasturtium-forest text-nasturtium-linen" : "text-nasturtium-sage hover:bg-nasturtium-olive/10"}" %>
+  <%# View toggle + CSV download %>
+  <div class="flex items-center justify-between gap-4 mb-6">
+    <div class="inline-flex rounded border border-nasturtium-forest/20 overflow-hidden">
+      <%= link_to "By guest", admin_guests_path(view: "guests", q: @query.presence),
+            class: "px-4 py-2 text-xs tracking-[0.2em] uppercase #{@view == "guests" ? "bg-nasturtium-forest text-nasturtium-linen" : "text-nasturtium-sage hover:bg-nasturtium-olive/10"}" %>
+      <%= link_to "By group", admin_guests_path(view: "groups", q: @query.presence),
+            class: "px-4 py-2 text-xs tracking-[0.2em] uppercase #{@view == "groups" ? "bg-nasturtium-forest text-nasturtium-linen" : "text-nasturtium-sage hover:bg-nasturtium-olive/10"}" %>
+    </div>
+    <%# data-turbo=false so the browser handles the file download itself %>
+    <%= link_to export_admin_guests_path(format: :csv, q: @query.presence), data: { turbo: false },
+          class: "inline-flex items-center gap-2 border border-nasturtium-forest/30 px-4 py-2 text-xs tracking-[0.2em] uppercase text-nasturtium-forest hover:bg-nasturtium-olive/10 transition-colors whitespace-nowrap" do %>
+      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" />
+      </svg>
+      <%= @query.present? ? "Download results" : "Download CSV" %>
+    <% end %>
   </div>
 
   <% if @view == "groups" %>

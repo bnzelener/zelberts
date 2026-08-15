@@ -1,3 +1,5 @@
+require "csv"
+
 class Guest < ApplicationRecord
   belongs_to :invite_group, optional: true
   has_many :event_responses, dependent: :destroy
@@ -66,6 +68,50 @@ class Guest < ApplicationRecord
     where.not(invite_group_id: nil)
   end
 
+  BASE_CSV_HEADERS = [
+    "First name", "Last name", "Group", "Group email", "Phone", "Status",
+    "Dietary notes", "Plus one allowed", "Plus one", "Plus one of",
+    "WeeCasa included", "WeeCasa response", "Email opt-in", "Responded at"
+  ].freeze
+
+  # Admin export: one row per guest, plus a column per event carrying that
+  # guest's RSVP for it.
+  def self.to_csv(guests, events: Event.all.to_a)
+    CSV.generate do |csv|
+      csv << BASE_CSV_HEADERS + events.map(&:name)
+      guests.each { |guest| csv << guest.csv_row(events) }
+    end
+  end
+
+  def csv_row(events)
+    responses = event_responses.index_by(&:event_id)
+
+    [
+      first_name,
+      last_name,
+      invite_group&.name,
+      invite_group&.email,
+      phone,
+      status_label,
+      dietary_notes,
+      yes_no(plus_one_allowed),
+      plus_one_guest&.full_name,
+      plus_one_host&.full_name,
+      invite_group ? yes_no(invite_group.weecasa_included) : nil,
+      yes_no(invite_group&.weecasa_response),
+      invite_group ? yes_no(invite_group.email_opt_in) : nil,
+      responded_at&.strftime("%Y-%m-%d %H:%M")
+    ] + events.map { |event| yes_no(responses[event.id]&.attending) }
+  end
+
+  def status_label
+    case attending
+    when true  then "Attending"
+    when false then "Declined"
+    else            "Pending"
+    end
+  end
+
   def full_name
     "#{first_name} #{last_name}"
   end
@@ -83,6 +129,13 @@ class Guest < ApplicationRecord
   end
 
   private
+
+  # CSV cells for tri-state booleans: unanswered stays blank rather than "No".
+  def yes_no(value)
+    return nil if value.nil?
+
+    value ? "Yes" : "No"
+  end
 
   # The plus-one's name is required once a host commits to bringing one.
   def plus_one_name_present

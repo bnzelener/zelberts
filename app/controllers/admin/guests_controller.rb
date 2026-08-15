@@ -38,6 +38,21 @@ class Admin::GuestsController < Admin::BaseController
     @pending_count = Guest.pending.count
   end
 
+  # Download the full guest list (or the current search results) as a CSV,
+  # ordered by household so it reads like a roster in a spreadsheet.
+  def export
+    guests = Guest.includes(:invite_group, :plus_one_guest, :plus_one_host, :event_responses)
+                  .left_joins(:invite_group)
+                  .order(Arel.sql("invite_groups.name NULLS LAST"))
+                  .order(:last_name, :first_name)
+    query = params[:q].to_s.strip
+    guests = guests.merge(Guest.search(query)) if query.present?
+
+    send_data Guest.to_csv(guests),
+              type: "text/csv",
+              filename: "guests-#{Date.current.strftime('%Y-%m-%d')}.csv"
+  end
+
   def edit
   end
 

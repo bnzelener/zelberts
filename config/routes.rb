@@ -25,7 +25,9 @@ Rails.application.routes.draw do
 
   # Admin (intentionally not linked from public nav)
   namespace :admin, path: "manage" do
-    resources :guests, only: [ :index, :edit, :update ]
+    resources :guests, only: [ :index, :edit, :update ] do
+      collection { get :export }
+    end
     resources :invite_groups, only: [ :show, :edit, :update, :destroy ]
     resource :guest_import, only: [ :new, :create ]
     resources :events
