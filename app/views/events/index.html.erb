@@ -124,61 +124,22 @@
     <p class="font-serif font-light text-3xl text-center mb-1">Shuttles</p>
     <p class="text-xs tracking-[0.3em] uppercase text-center mb-6">Saturday, September 12th</p>
     <p class="text-sm leading-relaxed text-center md:max-w-xl md:mx-auto mb-10">
-      We&rsquo;re running shuttles on the wedding day between the Home2 Suites room block in
-      Longmont, the WeeCasa Tiny Homes in Lyons, the Farmette, and the after party at MainStage
-      Brewing. Hop on whichever run works for you &mdash; no sign-up needed.
+      We&rsquo;re running shuttles to the ceremony from the Home2 Suites room block in Longmont
+      and the WeeCasa Tiny Homes in Lyons. Hop on whichever run works for you &mdash; no sign-up
+      needed.
     </p>
 
-    <div class="grid gap-8 md:grid-cols-2 md:gap-x-10">
-      <div class="space-y-8">
-        <% [
-          ["To the ceremony", [
-            ["3:00 PM", "Home2 Suites", "The Lyons Farmette"],
-            ["3:20 PM", "Home2 Suites", "The Lyons Farmette"],
-            ["3:40 PM", "WeeCasa Tiny Homes", "The Lyons Farmette"]
-          ]],
-          ["To the after party", [
-            ["9:45 PM", "The Lyons Farmette", "MainStage Brewing"],
-            ["9:55 PM", "The Lyons Farmette", "MainStage Brewing"],
-            ["10:05 PM", "The Lyons Farmette", "MainStage Brewing"]
-          ]]
-        ].each do |heading, runs| %>
-          <div>
-            <p class="text-xs tracking-[0.3em] uppercase mb-4"><%= heading %></p>
-            <div class="space-y-3">
-              <% runs.each do |time, from, to| %>
-                <div class="flex gap-4">
-                  <p class="font-serif text-lg leading-snug w-24 shrink-0"><%= time %></p>
-                  <p class="text-sm leading-snug pt-1"><%= from %> &rarr; <%= to %></p>
-                </div>
-              <% end %>
-            </div>
-          </div>
-        <% end %>
-      </div>
-
-      <div class="pt-8 border-t border-nasturtium-forest-dark/15 md:pt-0 md:border-t-0 md:border-l md:border-nasturtium-forest-dark/15 md:pl-10">
-        <p class="text-xs tracking-[0.3em] uppercase mb-4">Back to the room block</p>
-        <div class="space-y-3">
-          <% [
-            ["9:00 PM", "The Lyons Farmette", "Home2 Suites"],
-            ["10:15 PM", "MainStage Brewing", "Home2 Suites"],
-            ["11:00 PM", "MainStage Brewing", "Home2 Suites"],
-            ["12:00 AM", "MainStage Brewing", "Home2 Suites"]
-          ].each do |time, from, to| %>
-            <div class="flex gap-4">
-              <p class="font-serif text-lg leading-snug w-24 shrink-0"><%= time %></p>
-              <p class="text-sm leading-snug pt-1"><%= from %> &rarr; <%= to %></p>
-            </div>
-          <% end %>
+    <div class="space-y-3 md:w-fit md:mx-auto">
+      <% [
+        ["3:00 PM", "Home2 Suites", "The Lyons Farmette"],
+        ["3:20 PM", "Home2 Suites", "The Lyons Farmette"],
+        ["3:40 PM", "WeeCasa Tiny Homes", "The Lyons Farmette"]
+      ].each do |time, from, to| %>
+        <div class="flex gap-4">
+          <p class="font-serif text-lg leading-snug w-24 shrink-0"><%= time %></p>
+          <p class="text-sm leading-snug pt-1"><%= from %> &rarr; <%= to %></p>
         </div>
-
-        <p class="text-sm leading-relaxed mt-8">
-          Staying at WeeCasa? MainStage Brewing is right across the street, so the after party
-          shuttles double as your ride home &mdash; and it&rsquo;s a short walk back whenever
-          you&rsquo;re ready.
-        </p>
-      </div>
+      <% end %>
     </div>
 
     <p class="text-xs leading-relaxed text-center mt-10 pt-6 border-t border-nasturtium-forest-dark/15">
@@ -209,9 +170,8 @@
           <span class="ml-4 transition-transform duration-200 group-open:rotate-45 text-nasturtium-forest-dark text-2xl leading-none">+</span>
         </summary>
         <div class="px-6 pb-5 text-nasturtium-forest-dark text-sm leading-relaxed">
-          Yes! On Saturday we&rsquo;re running shuttles from the Home2 Suites room block and the
-          WeeCasa Tiny Homes to the Farmette, and back from the Farmette and the after party at
-          MainStage Brewing to Home2 Suites. See the shuttle times above for the full schedule.
+          Yes! On Saturday we&rsquo;re running shuttles to the ceremony from the Home2 Suites
+          room block and the WeeCasa Tiny Homes. See the shuttle times above for departure times.
         </div>
       </details>
 
