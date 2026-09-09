@@ -31,4 +31,13 @@ Event.create!(
   sort_order: 3
 )
 
+Event.create!(
+  name: "Sunday Bagels",
+  date: Date.new(2026, 9, 13),
+  time: "11:00 AM - 2:00 PM",
+  location: "LaVern M Johnson Park",
+  address: "600 Park Dr, Lyons, CO 80540",
+  sort_order: 4
+)
+
 puts "Seeded #{Event.count} events"
